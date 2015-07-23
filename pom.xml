@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+  <parent>
+    <groupId>org.nerd4j</groupId>
+    <artifactId>nerd4j-base</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.nerd4j</groupId>
+  <artifactId>nerd4j-core</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <packaging>jar</packaging>
+
+  <name>Nerd4j Core</name>
+  <description>Basic beans and utilities.</description>
+
+  <inceptionYear>2011</inceptionYear>
+  
+  <dependencies>
+    
+    <!-- LOGGING DEPENDENCIES -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.2</version>
+      <scope>compile</scope>
+    </dependency>
+
+  </dependencies>
+
+</project>
