@@ -12,3 +12,13 @@ The classes of this library are divided into several concepts:
 * Net: currently contains just the class `IPv4Address` that represents a lightweight and compatible version of `java.net.InetAddress`.
 * Time: useful classes to deal with `java.util.Date` and `java.util.Calendar`.
 * Util: utility classes like the `DataConsistency` checker that allows to make assertions on data fields, the `HashCoder` that provides an easy way to generate `hashcode`s from the internal fields of a bean, the `CommandIterator` that allows to apply the same operation to all the items of a collection or an array.
+
+
+This library is also available on Maven Central [here] (http://search.maven.org/#artifactdetails|org.nerd4j|nerd4j-core|1.0.0|jar "Maven Central: nerd4j-core") and can be used with the following dependecy declaration:
+```xml
+<dependency>
+ <groupId>org.nerd4j</groupId>
+ <artifactId>nerd4j-core</artifactId>
+ <version>1.0.0</version>
+</dependency>
+```
