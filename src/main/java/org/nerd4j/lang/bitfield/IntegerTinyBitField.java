@@ -21,10 +21,6 @@
  */
 package org.nerd4j.lang.bitfield;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.nerd4j.lang.BitField;
 
 /**
  * Simple extension of {@link AbstractTinyBitField} that handles indexes of
@@ -106,31 +102,6 @@ public class IntegerTinyBitField extends AbstractTinyBitField<Integer>
 	{
 		
 		return index.intValue();
-		
-	}
-	
-	/**
-	 * Returns a {@link Map} representation of this {@link BitField}.
-	 * 
-	 * @return a map representation of the bit field.
-	 */
-	@Override
-	public Map<Integer, Boolean> toMap()
-	{
-		
-		Map<Integer,Boolean> map = new HashMap<Integer,Boolean>( size() );
-		
-		final int size = size();
-		long value = toLong();
-		
-		/*
-		 * Avoid the looping through get(index) method cause handling a long is
-		 * really simple and more performing.
-		 */
-		for( int position = 0; position < size; ++position )
-			map.put( position, (((value >> position) & 1L) == 1L) );
-		
-		return map;
 		
 	}
 

@@ -21,10 +21,6 @@
  */
 package org.nerd4j.lang.bitfield;
 
-import java.util.EnumMap;
-import java.util.Map;
-
-import org.nerd4j.lang.BitField;
 
 
 /**
@@ -48,9 +44,6 @@ public class EnumTinyBitField<E extends Enum<E>> extends AbstractTinyBitField<E>
 	
 	/** The type of the {@link Enum Enum&#60;E&#62;} to handle. */
 	private final Class<E> enumClass;
-	
-	/** Saved Enum constants to avoid constant enum array cloning. */
-	private final E[] enumConstants;
 	
 	
 	/**
@@ -89,7 +82,6 @@ public class EnumTinyBitField<E extends Enum<E>> extends AbstractTinyBitField<E>
 		super( clazz.getEnumConstants().length, data );
 		
 		enumClass = clazz;
-		enumConstants = enumClass.getEnumConstants();
 		
 	}
 	
@@ -120,32 +112,6 @@ public class EnumTinyBitField<E extends Enum<E>> extends AbstractTinyBitField<E>
 		
 		check( index );
 		return index.ordinal();
-		
-	}
-	
-	/**
-	 * Returns a {@link Map} representation of this {@link BitField}.
-	 * 
-	 * @return a map representation of the bit field.
-	 */
-	@Override
-	public Map<E, Boolean> toMap()
-	{
-		
-		Map<E,Boolean> map = new EnumMap<E,Boolean>( enumClass );
-		
-		int size = size();
-		
-		long value = toLong();
-		
-		/*
-		 * Avoid the looping through get(index) method cause handling a long is
-		 * really simple and more performing.
-		 */
-		for( int position = 0; position < size; ++position )
-			map.put( enumConstants[position], (((value >> position) & 1L) == 1L) );
-		
-		return map;
 		
 	}
 	

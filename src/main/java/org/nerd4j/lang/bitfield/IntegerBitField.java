@@ -21,10 +21,6 @@
  */
 package org.nerd4j.lang.bitfield;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.nerd4j.lang.BitField;
 
 /**
  * Simple extension of {@link AbstractBitField}
@@ -132,24 +128,6 @@ public class IntegerBitField extends AbstractBitField<Integer>
 	{
 		
 		return index.intValue();
-		
-	}
-	
-	/**
-	 * Returns a {@link Map} representation of this {@link BitField}.
-	 * 
-	 * @return a map representation of the bit field.
-	 */
-	@Override
-	public Map<Integer, Boolean> toMap()
-	{
-		
-		Map<Integer,Boolean> map = new HashMap<Integer,Boolean>( size() );
-		
-		for( int i = 0; i < size(); ++i )
-			map.put( i, this.get(i) );
-		
-		return map;
 		
 	}
 	

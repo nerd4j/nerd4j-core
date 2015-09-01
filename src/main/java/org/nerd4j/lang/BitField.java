@@ -21,7 +21,6 @@
  */
 package org.nerd4j.lang;
 
-import java.util.Map;
 
 
 /**
@@ -83,12 +82,5 @@ public interface BitField<I>
 	 * @return the size of the bit field.
 	 */
 	public int size();
-	
-	/**
-	 * Returns a {@link Map} representation of this {@link BitField}.
-	 * 
-	 * @return a map representation of the bit field.
-	 */
-	public Map<I,Boolean> toMap();
-	
+		
 }

@@ -21,10 +21,6 @@
  */
 package org.nerd4j.lang.bitfield;
 
-import java.util.EnumMap;
-import java.util.Map;
-
-import org.nerd4j.lang.BitField;
 
 
 /**
@@ -49,9 +45,7 @@ public class EnumBitField<E extends Enum<E>> extends AbstractBitField<E>
 	/** The type of the {@link Enum Enum&#60;E&#62;} to handle. */
 	private final Class<E> enumClass;
 	
-	/** Saved Enum constants to avoid constant enum array cloning. */
-	private final E[] enumConstants;
-	
+
 	/**
 	 * Creates an {@link EnumBitField} that handles
 	 * {@link Enum Enum&#60;E&#62;} of the provided
@@ -68,7 +62,6 @@ public class EnumBitField<E extends Enum<E>> extends AbstractBitField<E>
 		super( enumType.getEnumConstants().length );
 		
 		enumClass = enumType;
-		enumConstants = enumClass.getEnumConstants();
 		
 	}
 	
@@ -102,7 +95,6 @@ public class EnumBitField<E extends Enum<E>> extends AbstractBitField<E>
 		super( clazz.getEnumConstants().length, data );
 		
 		enumClass = clazz;
-		enumConstants = enumClass.getEnumConstants();
 		
 	}
 	
@@ -133,24 +125,6 @@ public class EnumBitField<E extends Enum<E>> extends AbstractBitField<E>
 		
 		check( index );
 		return index.ordinal();
-		
-	}
-	
-	/**
-	 * Returns a {@link Map} representation of this {@link BitField}.
-	 * 
-	 * @return a map representation of the bit field.
-	 */
-	@Override
-	public Map<E, Boolean> toMap()
-	{
-		
-		Map<E,Boolean> map = new EnumMap<E,Boolean>( enumClass );
-		
-		for( E e : enumConstants )
-			map.put( e, this.get(e) );
-		
-		return map;
 		
 	}
 	

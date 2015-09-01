@@ -28,7 +28,9 @@ import java.util.Iterator;
  * Utility class with the aim of checking equality between objects.
  *
  * @author Nerd4j Team
+ * @deprecated Use {@link EqualsUtils} instead.
  */
+@Deprecated
 public class Equalizer
 {
 
