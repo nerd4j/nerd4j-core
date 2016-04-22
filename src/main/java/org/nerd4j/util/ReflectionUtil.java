@@ -278,7 +278,15 @@ public class ReflectionUtil
 			 */
 			for( Method method : methods )
 			{
-
+				
+				/* 
+				 * We need to check if the method is flagged as "synthetic"
+		         * or "bridge" because also those methods are returned by
+		         * class.getDeclaredMethods() but we don't want to return them.
+		         */
+				if( method.isSynthetic() || method.isBridge() )
+					continue;
+				
 				A annotation = method.getAnnotation( annotationClass );
 				if ( annotation != null )
 				{
@@ -342,17 +350,26 @@ public class ReflectionUtil
 			 */
 			Method method = clazz.getMethod( methodName, (Class<?>[]) null );
 			
+			/* 
+			 * The method class.getDeclaredMethods() returns also
+			 * methods flagged as "synthetic" and "bridge", probably
+			 * it's not the case for class.getDeclaredMethod(String,Class<?>...)
+			 * but we perform the check for safety.
+	         */
+			if( method.isSynthetic() || method.isBridge() )
+				throw new NoSuchMethodException();
+			
 			/* We log for debug purpose that the method has been found. */
 			if ( logger.isDebugEnabled() )
 				logger.debug( "Public method " + methodName + " found in class " + clazz.getCanonicalName() + "." );
 			
 			return method;
 			
-		} catch ( NoSuchMethodException e )
+		}catch( NoSuchMethodException ex )
 		{
 			
 			/*
-			 * We log that the method has been found but
+			 * We log that the method cannot be found but
 			 * we don't handle the NoSuchMethodException.
 			 */
 			if ( logger.isWarnEnabled() )
@@ -430,6 +447,15 @@ public class ReflectionUtil
 			try{
 				
 				method = currClazz.getDeclaredMethod( name, parameterTypes );
+				
+				/* 
+				 * The method class.getDeclaredMethods() returns also
+				 * methods flagged as "synthetic" and "bridge", probably
+				 * it's not the case for class.getDeclaredMethod(String,Class<?>...)
+				 * but we perform the check for safety.
+		         */
+				if( method.isSynthetic() || method.isBridge() )
+					continue;
 				
 				/* 
     			 * If this point is reached it means that a matching method
@@ -521,7 +547,17 @@ public class ReflectionUtil
 				
 				try{
 					
+					
 					method = currClazz.getDeclaredMethod( methodName, none );
+					
+					/* 
+					 * The method class.getDeclaredMethods() returns also
+					 * methods flagged as "synthetic" and "bridge", probably
+					 * it's not the case for class.getDeclaredMethod(String,Class<?>...)
+					 * but we perform the check for safety.
+			         */
+					if( method.isSynthetic() || method.isBridge() )
+						continue;
 					
 					/* 
 	    			 * If this point is reached it means that a matching method
@@ -590,7 +626,7 @@ public class ReflectionUtil
 	    
 	    
 	    /* Name of the method to search. */
-	    final String setterName = "set" + Character.toUpperCase( property.charAt( 0 ) ) + property.substring( 1 );
+	    final String setterName = "set" + Character.toUpperCase( property.charAt(0) ) + property.substring( 1 );
 	    
         final List<Method> setters = new LinkedList<Method>();
         final Method[] allPublicMethods = clazz.getMethods();
@@ -598,10 +634,15 @@ public class ReflectionUtil
         /*
          * If we find a method with the given name and only one parameter
          * we add it to the list of possible setters.
+         * We need to check if the method is flagged as "synthetic"
+         * or "bridge" because also those methods are returned by
+		 * class.getDeclaredMethods() but we don't want to return them.
          */
         for( Method method : allPublicMethods )
-            if( method.getName().equals(setterName) &&
-                method.getParameterTypes().length == 1 )
+            if( ! method.isSynthetic() &&
+            	! method.isBridge() &&
+            	method.getParameterTypes().length == 1 &&
+            	method.getName().equals(setterName) )
             {
                 setters.add( method );
                 
@@ -699,13 +740,7 @@ public class ReflectionUtil
 		
 		/* Names of the methods to search. */
 		final String[] methodNames = { "get" + name, "is"  + name, "has" + name };
-		
-		/*
-		 * "currClazz" will be null when the top of the class hierarchy
-		 * will be reached.
-		 */
-		Class<?> currClazz = clazz;
-		
+			
 		/* Getter do not have any parameters... */
 		final Class<?>[] none = (Class<?>[]) null;
 		
@@ -715,7 +750,16 @@ public class ReflectionUtil
 			
 			try{
 				
-				method = currClazz.getMethod( methodName, none );
+				method = clazz.getMethod( methodName, none );
+				
+				/* 
+				 * The method class.getDeclaredMethods() returns also
+				 * methods flagged as "synthetic" and "bridge", probably
+				 * it's not the case for class.getDeclaredMethod(String,Class<?>...)
+				 * but we perform the check for safety.
+		         */
+				if( method.isSynthetic() || method.isBridge() )
+					continue;
 				
 				/* 
     			 * If this point is reached it means that a matching method
@@ -771,21 +815,21 @@ public class ReflectionUtil
 	{
 		
 		/* Parameters check. */
-		if ( hasParameters( method ) )
+		if( hasParameters(method) )
 		{
 			logger.debug( "Method {} has parameters.", method );
 			return false;
 		}
 		
 		/* Return type check. */
-		if ( !hasReturn( method ) )
+		if( ! hasReturn(method) )
 		{
 			logger.debug( "Method {} returns void.", method );
 			return false;
 		}
 		
 		/* Name pattern check. */
-		if ( !( getterPattern.matcher( method.getName() )).matches() )
+		if( ! (getterPattern.matcher(method.getName())).matches() )
 		{
 			logger.debug( "Method {} doesn't match '{}'.", method, getterPattern.pattern() );
 			return false;
@@ -816,22 +860,22 @@ public class ReflectionUtil
 	{
 		
 		/* Parameters check. */
-		if ( hasParameters( method ) )
+		if( hasParameters(method) )
 		{
 			logger.debug( "Method {} has parameters.", method );
 			return null;
 		}
 		
 		/* Return type check. */
-		if ( !hasReturn( method ) )
+		if( ! hasReturn(method) )
 		{
 			logger.debug( "Method {} returns void.", method );
 			return null;
 		}
 		
 		/* Name pattern check. */
-		Matcher matcher;
-		if ( !(matcher = getterPattern.matcher( method.getName() )).matches() )
+		final Matcher matcher;
+		if( ! (matcher = getterPattern.matcher(method.getName())).matches() )
 		{
 			logger.debug( "Method {} doesn't match '{}'.", method, getterPattern.pattern() );
 			return null;
@@ -866,7 +910,7 @@ public class ReflectionUtil
 		/* Return type check. */
 		final Class<?> returnType = method.getReturnType();
 		
-		return  !( returnType.equals( Void.TYPE ) || returnType.equals( Void.class ) );
+		return ! ( returnType.equals( Void.TYPE ) || returnType.equals( Void.class ) );
 		
 	}
 	
