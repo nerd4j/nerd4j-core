@@ -350,15 +350,6 @@ public class ReflectionUtil
 			 */
 			Method method = clazz.getMethod( methodName, (Class<?>[]) null );
 			
-			/* 
-			 * The method class.getDeclaredMethods() returns also
-			 * methods flagged as "synthetic" and "bridge", probably
-			 * it's not the case for class.getDeclaredMethod(String,Class<?>...)
-			 * but we perform the check for safety.
-	         */
-			if( method.isSynthetic() || method.isBridge() )
-				throw new NoSuchMethodException();
-			
 			/* We log for debug purpose that the method has been found. */
 			if ( logger.isDebugEnabled() )
 				logger.debug( "Public method " + methodName + " found in class " + clazz.getCanonicalName() + "." );
@@ -454,8 +445,9 @@ public class ReflectionUtil
 				 * it's not the case for class.getDeclaredMethod(String,Class<?>...)
 				 * but we perform the check for safety.
 		         */
-				if( method.isSynthetic() || method.isBridge() )
-					continue;
+				// <<TO-REMOVE>>
+//				if( method.isSynthetic() || method.isBridge() )
+//					continue;
 				
 				/* 
     			 * If this point is reached it means that a matching method
@@ -556,8 +548,9 @@ public class ReflectionUtil
 					 * it's not the case for class.getDeclaredMethod(String,Class<?>...)
 					 * but we perform the check for safety.
 			         */
-					if( method.isSynthetic() || method.isBridge() )
-						continue;
+					// <<TO-REMOVE>>
+//					if( method.isSynthetic() || method.isBridge() )
+//						continue;
 					
 					/* 
 	    			 * If this point is reached it means that a matching method
@@ -751,16 +744,7 @@ public class ReflectionUtil
 			try{
 				
 				method = clazz.getMethod( methodName, none );
-				
-				/* 
-				 * The method class.getDeclaredMethods() returns also
-				 * methods flagged as "synthetic" and "bridge", probably
-				 * it's not the case for class.getDeclaredMethod(String,Class<?>...)
-				 * but we perform the check for safety.
-		         */
-				if( method.isSynthetic() || method.isBridge() )
-					continue;
-				
+								
 				/* 
     			 * If this point is reached it means that a matching method
     			 * has been found, elsewhere a NoSuchMethodException has been
