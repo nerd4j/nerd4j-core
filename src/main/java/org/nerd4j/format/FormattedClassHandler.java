@@ -49,7 +49,6 @@ import org.slf4j.LoggerFactory;
  * {@link #toStringContent(Object, boolean)}. Each field or getter of the class
  * hierarchy annotated with {@link Formatted &#64;Formatted} will be used to
  * create the textual representation.
- * </p>
  * 
  * @author Nerd4j Team
  */
@@ -85,9 +84,8 @@ public class FormattedClassHandler
 	/**
 	 * Default constructor.
 	 * <p>
-	 *  It is private because this class can have only
-	 *  one instance provided by {@link FormattedClassHandler#getInstance()}.
-	 * </p>
+	 * It is private because this class can have only
+	 * one instance provided by {@link FormattedClassHandler#getInstance()}.
 	 */
 	private FormattedClassHandler()
 	{
@@ -102,7 +100,7 @@ public class FormattedClassHandler
 	/* **************** */
 	
 	
-	/** String representation of <code>null</code> instances. */
+	/** String representation of {@code null} instances. */
 	private static final String NULL_OBJECT_STRING = "<null>";
 	
 	/** String representation of unreachable instances because a null element in theirs path. */
@@ -136,8 +134,7 @@ public class FormattedClassHandler
      * with {@link Formatted &#64;Formatted} present on the class if the
      * provided object and super-classes.
 	 * <p>
-	 *  <code>null</code> values will always be printed.
-	 * </p>
+	 * {@code null} values will always be printed.
 	 * 
 	 * @param object instance to be formatted.
 	 * @return formatted string representation.
@@ -154,12 +151,11 @@ public class FormattedClassHandler
      * with {@link Formatted &#64;Formatted} present on the class if the
      * provided object and super-classes.
      * <p>
-     *  <code>null</code> values will printed according to the
-     *  <code>printNull</code> flag.
-     * </p>
+     * {@code null} values will printed according to the
+     * {@code printNull} flag.
 	 * 
 	 * @param object    instance to be formatted.
-	 * @param printNull tells if <code>null</code> values should be printed.
+	 * @param printNull tells if {@code null} values should be printed.
 	 * @return formatted string representation.
 	 */
 	public final String toStringContent( Object object, boolean printNull )
@@ -539,7 +535,7 @@ public class FormattedClassHandler
 	 * 
 	 * @param object        instance on which to apply the configuration.
 	 * @param configuration configuration to apply.
-	 * @return the object to print, or <code>null</code>.
+	 * @return the object to print, or {@code null}.
 	 * 
 	 * @throws NullPointerException
 	 *             if the right instance to print isn't reachable because a null
@@ -629,7 +625,6 @@ public class FormattedClassHandler
 	 * <p>
 	 * Once completely generated all toStringContent on the stack it will be
 	 * cleaned.
-	 * </p>
 	 * 
 	 * @author Nerd4j Team
 	 */
@@ -706,8 +701,9 @@ public class FormattedClassHandler
 		
 		/**
 		 * Returns the Java language modifiers as an integer. The
-		 * <code>Modifier</code> class should be used to decode the modifiers.
+		 * {@code Modifier} class should be used to decode the modifiers.
 		 * 
+		 * @return Java language modifiers.
 		 * @see Modifier
 		 */
 		public int getModifiers();
@@ -763,9 +759,11 @@ public class FormattedClassHandler
 		public Object getValue( Object instance ) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException;
 		
 		/**
-		 * Returns the <code>Class</code> object representing the class or
+		 * Returns the {@code Class} object representing the class or
 		 * interface that declares the object represented by this
-		 * <code>ReflectionObject</code>.
+		 * {@code ReflectionObject}.
+		 * 
+		 * @return class represented by this object.
 		 */
 		public Class<?> getDeclaringClass();
 		

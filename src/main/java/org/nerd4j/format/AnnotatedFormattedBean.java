@@ -24,30 +24,28 @@ package org.nerd4j.format;
 import java.io.Serializable;
 
 /**
- * Represents a generic <code> Java Bean </ code> equipped with a method
- * that simplifies and standardizes the textual representation provided
- * by the method {@link Object#toString()}.
+ * Represents a generic {@code Java Bean} equipped with a method
+ * that simplifies and standardizes the textual representation
+ * provided by the method {@link Object#toString()}.
  * 
  * <p>
- *  All classes that extend this must represent a <code>Java Bean</code>
- *  and therefore must fulfill the following requirements:
- *  <ol>
- *   <li>Must have a parameterless constructor (so-called <code>default constructor</code>).</li>
- *   <li>Must expose the property access methods (so-called  <code>getters</code> and <code>setters</code>).</li>   
- *   <li>Must implement the {@link java.io.Serializable} interface.</li>
- *  </ol>
- * </p>
+ * All classes that extend this must represent a {@code Java Bean}
+ * and therefore must fulfill the following requirements:
+ * <ol>
+ *  <li>Must have a parameterless constructor (so-called {@code default constructor}).</li>
+ *  <li>Must expose the property access methods (so-called  {@code getters} and {@code setters}).</li>   
+ *  <li>Must implement the {@link java.io.Serializable} interface.</li>
+ * </ol>
  * 
  * <p>
- *  Using this type of <code>Java Bean</code> the method {@link Object#toString()}
- *  will return a text in the form:
+ * Using this type of {@code Java Bean} the method {@link Object#toString()}
+ * will return a text in the form:
  * <pre>
  *  class.simpleName [ field_1.name=field_1.value, field_2.name=field_2.value, ... ]
  * </pre>
- * </p>
+ * 
  * <p>
- *  The fields to be printed must be annotated with {@link Formatted @Formatted}.
- * </p>
+ * The fields to be printed must be annotated with {@link Formatted @Formatted}.
  * 
  * @author Nerd4j Team
  */

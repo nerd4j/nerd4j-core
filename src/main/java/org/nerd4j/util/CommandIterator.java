@@ -28,7 +28,7 @@ package org.nerd4j.util;
  * The aim of this class is to iterate the same {@link Command} over each
  * element in the given array or {@link Iterable} object.
  * 
- * @author @author Nerd4j Team
+ * @author Nerd4j Team
  */
 public final class CommandIterator
 {
@@ -137,13 +137,18 @@ public final class CommandIterator
 	/**
 	 * Simple implementation of the {@code Command Design Pattern} interface
 	 * used by the {@link CommandIterator} to apply the requested operation
-	 * to each element in the iterable object.
+	 * to each element in the {@link Iterable} object.
 	 * 
-	 * @author @author Nerd4j Team
+	 * @author Nerd4j Team
 	 */
 	public interface Command
 	{
 		
+		/**
+		 * Executes the command on the given object.
+		 * 
+		 * @param value the target of the command.
+		 */
 		public void executeOn( Object value );
 		
 	}

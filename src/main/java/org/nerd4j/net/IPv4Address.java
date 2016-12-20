@@ -36,12 +36,10 @@ import java.util.regex.Pattern;
  * {@link #intValue()}, {@link #stringValue()} and {@link #rawValue()}.
  * The IP <i>raw</i> format is the same returned by the method  {@link InetAddress#getAddress()}
  * in order to simplify the passage from one class to the other.
- * </p>
  * <p>
  * This class provides immutable instances that can be created using the
  * available factory methods: {@link #valueOf(int)}, {@link #valueOf(String)},
  * {@link #valueOf(byte[])}.
- * </p>
  * <p>
  * The implementation of the {@link Comparable} interface can be misleading
  * because internally the IP value is represented using an {@code int}.
@@ -50,10 +48,10 @@ import java.util.regex.Pattern;
  * is the {@code int} value {@code 0}. Another example is given by the IP
  * {@code 127.255.255.255} and the IP {@code 128.0.0.0} the first is the
  * {@code int} value {@code 2147483647} while the second is the {@code int}
- * value {@code -2147483648}.<br />
+ * value {@code -2147483648}.
+ * <p>
  * In other words the method {@link #compareTo(IPv4Address)} compares the
  * IP address as they were two unsigned {@code int} values.
- * </p>
  * 
  * @author Nerd4j Team
  */
@@ -114,9 +112,8 @@ public final class IPv4Address implements Serializable, Comparable<IPv4Address>
 	/**
 	 * Private constructor.
 	 * <p>
-	 *  It's not possible to access the constructor, use the factory
-	 *  methods instead.
-	 * </p>
+	 * It's not possible to access the constructor, use the factory
+	 * methods instead.
 	 * 
 	 * @param ip the IP represented as an integer.
 	 */
@@ -151,9 +148,8 @@ public final class IPv4Address implements Serializable, Comparable<IPv4Address>
 	/**
 	 * Returns an {@link IPv4Address} using the given {@link String} representation.
 	 * <p> 
-	 *  The textual representation can be in decimal (ie. {@code 255.255.255.255})
-	 *  or hex-decimal ({@code FF.FF.FF.FF}) notation.
-     * </p>
+	 * The textual representation can be in decimal (ie. {@code 255.255.255.255})
+	 * or hex-decimal ({@code FF.FF.FF.FF}) notation.
 	 * 
 	 * @param ip the IP represented as a {@link String}.
 	 * @return IP address.
@@ -191,8 +187,7 @@ public final class IPv4Address implements Serializable, Comparable<IPv4Address>
 	/**
 	 * Returns an {@link IPv4Address} using the given {@code raw} representation.
 	 * <p> 
-	 *  The raw format is the same provided by {@link InetAddress#getAddress()}.
-     * </p>
+	 * The raw format is the same provided by {@link InetAddress#getAddress()}.
 	 * 
 	 * @param ip the IP represented as a byre array.
 	 * @return IP address.
@@ -216,11 +211,10 @@ public final class IPv4Address implements Serializable, Comparable<IPv4Address>
 	/**
 	 * Returns an {@link IPv4Address} using the given {@link InetAddress} representation.
 	 * <p>
-	 *  This method supports conversions from {@link Inet6Address} if
-	 *  {@code ((Inet6Address)inet).isIPv4CompatibleAddress() == true} holds.
-     * </p>
+	 * This method supports conversions from {@link Inet6Address} if
+	 * {@code ((Inet6Address)inet).isIPv4CompatibleAddress() == true} holds.
 	 * 
-	 * @param ip the IP represented as a {@link IPv4Address}.
+	 * @param inet the IP represented as a {@link IPv4Address}.
 	 * @return IP address.
 	 * 
 	 * @throws IllegalArgumentException if the {@link Inet6Address} is not convertible.
@@ -434,8 +428,7 @@ public final class IPv4Address implements Serializable, Comparable<IPv4Address>
 	/**
 	 * Compares this instance whit the given one.
 	 * <p>
-	 *  The ordering is the same obtained by ordering two unsigned integers. 
-	 * </p>
+	 * The ordering is the same obtained by ordering two unsigned integers. 
 	 * 
 	 * @param other the instance to compare.
 	 * 
@@ -491,7 +484,7 @@ public final class IPv4Address implements Serializable, Comparable<IPv4Address>
     /**
      * Returns the textual representation of this IP address.
      * 
-     * @see {@link #stringValue()}.
+     * @see #stringValue()
      */
 	@Override
 	public String toString()

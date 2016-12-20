@@ -28,6 +28,8 @@ import org.nerd4j.util.HashCoder;
 /**
  * Base abstract implementation of the {@link Interval} interface.
  * 
+ * @param <T> type of the objects in the interval.
+ * 
  * @author Nerd4j Team
  */
 public abstract class AbstractInterval<T> extends AnnotatedFormattedBean implements Interval<T>
@@ -142,7 +144,9 @@ public abstract class AbstractInterval<T> extends AnnotatedFormattedBean impleme
 	 * 
 	 * @param value    the value to check.
 	 * @param interval the related interval.
-	 * @return {@code true} if the value belongs to the interval;<br/>
+	 * @param <X> type of the values in the interval.
+	 * 
+	 * @return {@code true} if the value belongs to the interval;<br>
 	 *         {@code false} otherwise.
 	 */
 	public static <X> boolean isInRange( X value, Interval<X> interval )
@@ -157,7 +161,9 @@ public abstract class AbstractInterval<T> extends AnnotatedFormattedBean impleme
 	 * 
 	 * @param i1 the first interval to check.
 	 * @param i2 the second interval to check.
-	 * @return {@code true} if there is at least one value in common;<br/>
+	 * @param <X> type of the values in the interval.
+	 *  
+	 * @return {@code true} if there is at least one value in common;<br>
 	 *         {@code false} otherwise.
 	 */
 	public static <X> boolean overlaps( Interval<X> i1, Interval<X> i2 )
@@ -172,7 +178,9 @@ public abstract class AbstractInterval<T> extends AnnotatedFormattedBean impleme
 	 * 
 	 * @param i1 i1 the first interval to check.
 	 * @param i2 the second interval to check.
-	 * @return {@code true} if the second interval is included in the first one;<br/>
+	 * @param <X> type of the values in the interval.
+	 *  
+	 * @return {@code true} if the second interval is included in the first one;<br>
 	 *         {@code false} otherwise.
 	 */
 	public static <X> boolean includes( Interval<X> i1, Interval<X> i2 )
@@ -191,12 +199,11 @@ public abstract class AbstractInterval<T> extends AnnotatedFormattedBean impleme
 	/**
 	 * Checks if the first value is strictly smaller than the second.
 	 * <p>
-	 *	The parameters given to this method are granted to be not null·   
-	 * </p>
+	 * The parameters given to this method are granted to be not null·   
 	 * 
 	 * @param t1 the first value to check.
 	 * @param t2 the second value to check.
-	 * @return {@code true} if the first value is less than the second;<br/>
+	 * @return {@code true} if the first value is less than the second;<br>
 	 *         {@code false} otherwise.
 	 */
     protected abstract boolean isLessThan( T t1, T t2 );

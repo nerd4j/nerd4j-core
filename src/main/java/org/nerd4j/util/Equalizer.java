@@ -40,20 +40,18 @@ public class Equalizer
 	 * they are both null and eventually if they
 	 * are instances of the same class.
 	 * <p>
-	 *  <b>Note</b>
-	 *  Those checks are common in all the implementations
-	 *  of the method {@link #equals(Object)} so this
-	 *  code can be used to avoid writing the same checks
-	 *  all the time.
-	 * </p>
+	 * <b>Note</b>
+	 * Those checks are common in all the implementations
+	 * of the method {@link #equals(Object)} so this
+	 * code can be used to avoid writing the same checks
+	 * all the time.
 	 * <p>
-	 *  A common use case is to implement the method {@link #equals(Object)}
-	 *  using this method like this {@code areComparable(this, other)} to
-	 *  check if the istances are comparabe and eventually use the metod
-	 *  {@link Equalizer#equals(Object, Object)} or
-	 *  {@link Equalizer#deepEquals(Object, Object)} to check
-	 *  the properties.
-	 * </p>
+	 * A common use case is to implement the method {@link #equals(Object)}
+	 * using this method like this {@code areComparable(this, other)} to
+	 * check if the istances are comparabe and eventually use the metod
+	 * {@link Equalizer#equals(Object, Object)} or
+	 * {@link Equalizer#deepEquals(Object, Object)} to check
+	 * the properties.
 	 * 
 	 * @param fst first object to check.
 	 * @param snd second object to check.
@@ -81,12 +79,11 @@ public class Equalizer
     /**
      * Tells if the two given objects are equal.
      * <p>
-     *  <b>Note</b>
-     *  This method checks equality by invoking
-     *  the {@link #equals(Object)} method on the
-     *  given objects, so it can't be used inside
-     *  a {@link #equals(Object)} itself.
-     * </p>
+     * <b>Note</b>
+     * This method checks equality by invoking
+     * the {@link #equals(Object)} method on the
+     * given objects, so it can't be used inside
+     * a {@link #equals(Object)} itself.
      * 
      * @param fst first object to check.
      * @param snd second object to check.
@@ -118,14 +115,14 @@ public class Equalizer
     /**
 	 * Tells if the two given list of objects are equal.
 	 * <p>
-	 *  The list of arguments must be in the form:
-	 *  {@code fstA, sndA, fstB, sndB, ...} otherwise
-	 *  the method will not be able to perform the
-	 *  check properly.
-	 * </p>
+	 * The list of arguments must be in the form:
+	 * {@code fstA, sndA, fstB, sndB, ...} otherwise
+	 * the method will not be able to perform the
+	 * check properly.
 	 * 
 	 * @param fst first object to check.
 	 * @param snd second object to check.
+	 * @param others other objects to check.
 	 * @return {@code true} if the given objects are two by two equal.
 	 * @throws IllegalArgumentException If the number of arguments is inconsistent.
 	 */
@@ -150,10 +147,9 @@ public class Equalizer
     /**
      * Tells if the two given objects are equal.
      * <p>
-     *  If the given objects are {@link Iterable} or
-     *  they are arrays this method iterates the
-     *  process to each contained element. 
-     * </p>
+     * If the given objects are {@link Iterable} or
+     * they are arrays this method iterates the
+     * process to each contained element. 
      * 
      * @param fst first object to deep check.
      * @param snd second object to deep check.
@@ -185,13 +181,13 @@ public class Equalizer
     /**
      * Tells if the two given objects are equal.
      * <p>
-     *  If the given objects are {@link Iterable} or
-     *  they are arrays this method iterates the
-     *  process to each contained element. 
-     * </p>
+     * If the given objects are {@link Iterable} or
+     * they are arrays this method iterates the
+     * process to each contained element. 
      * 
      * @param fst first object to deep check.
      * @param snd second object to deep check.
+     * @param others other objects to check.
      * @return {@code true} if the two objects are deeply equal.
      */
     public static boolean deepEquals( Object fst, Object snd, Object... others )

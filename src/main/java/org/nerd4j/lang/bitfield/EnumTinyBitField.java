@@ -26,11 +26,11 @@ package org.nerd4j.lang.bitfield;
 /**
  * Extension of {@link AbstractTinyBitField}
  * that handles indexes of type {@link Enum Enum&#60;E&#62;}.
+ * 
  * <p>
- *  Two EnumTinyBitField containing the same internal representation
- *  but created for two different {@link Enum Enum&#60;E&#62;}
- *  types are not comparable.
- * </p>
+ * Two EnumTinyBitField containing the same internal representation
+ * but created for two different {@link Enum Enum&#60;E&#62;}
+ * types are not comparable.
  * 
  * @author Nerd4j Team
  * 
@@ -94,11 +94,11 @@ public class EnumTinyBitField<E extends Enum<E>> extends AbstractTinyBitField<E>
 	/**
 	 * Performs the translation between the provided index
 	 * and that used internally.
+	 * 
 	 * <p>
-	 *  This method must return an integer in the range [0,size).
-	 *  In the other case a {@link IndexOutOfBoundsException} will
-	 *  be thrown when accessing the byte array.
-	 * </p>
+	 * This method must return an integer in the range [0,size).
+	 * In the other case a {@link IndexOutOfBoundsException} will
+	 * be thrown when accessing the byte array.
 	 * 
 	 * @param index the index to be translated.
 	 * @return the index to be used internally.

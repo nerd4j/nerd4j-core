@@ -30,7 +30,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * cases where it's needed to lock several resources.
  * 
  * <p>
- *  A use case can be the following:
+ * A use case can be the following:
  * 
  * <pre>
  * public abstract class ResourceHandler
@@ -63,8 +63,6 @@ import java.util.concurrent.locks.ReentrantLock;
  * 
  * }
  * </pre>
- * 
- * </p>
  * 
  * @author Nerd4j Team
  * 
@@ -179,13 +177,13 @@ public class KeyLock<K>
 	
 	/**
 	 * Attempts to release the lock at given key.
-	 * 
 	 * <p>
 	 * If the current thread is the key lock holder then the hold count is
 	 * decremented. If the hold count is now zero then the lock is released. If
 	 * the current thread is not the key lock holder then
 	 * {@link IllegalMonitorStateException} is thrown.
-	 * 
+	 *
+	 * @param key the key to be unlocked.
 	 * @throws IllegalMonitorStateException if the current thread does not hold given key lock
 	 */
 	public void unlock( K key ) 

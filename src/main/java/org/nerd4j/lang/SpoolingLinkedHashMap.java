@@ -28,6 +28,9 @@ import java.util.Map;
  * {@link Map} implementation able to remove oldest entries if maximum capacity
  * has been reached.
  * 
+ * @param <K> type of the key object.
+ * @param <V> type of the value object.
+ * 
  * @author Nerd4j Team
  */
 public class SpoolingLinkedHashMap<K,V> extends LinkedHashMap<K,V>
@@ -150,23 +153,20 @@ public class SpoolingLinkedHashMap<K,V> extends LinkedHashMap<K,V>
 	 * opportunity to remove the eldest entry each time a new one is added. This
 	 * is useful if the map represents a cache: it allows the map to reduce
 	 * memory consumption by deleting stale entries.
-	 * 
 	 * <p>
 	 * Will return true if:
 	 * <ol>
-	 * <li> the element has expired
+	 *  <li> the element has expired
 	 * </ol>
-	 * </p>
 	 * 
-	 * @param eldest
-	 *            The least recently inserted entry in the map, or if this is an
-	 *            access-ordered map, the least recently accessed entry. This is
-	 *            the entry that will be removed it this method returns
-	 *            <tt>true</tt>. If the map was empty prior to the
-	 *            <tt>put</tt> or <tt>putAll</tt> invocation resulting in
-	 *            this invocation, this will be the entry that was just
-	 *            inserted; in other words, if the map contains a single entry,
-	 *            the eldest entry is also the newest.
+	 * @param eldest The least recently inserted entry in the map, or if this is an
+	 *               access-ordered map, the least recently accessed entry. This is
+	 *               the entry that will be removed it this method returns
+	 *               <tt>true</tt>. If the map was empty prior to the
+	 *               <tt>put</tt> or <tt>putAll</tt> invocation resulting in
+	 *               this invocation, this will be the entry that was just
+	 *               inserted; in other words, if the map contains a single entry,
+	 *               the eldest entry is also the newest.
 	 * @return <tt>true</tt> if the eldest entry should be removed from the
 	 *         map; <tt>false</tt> if it should be retained.
 	 */

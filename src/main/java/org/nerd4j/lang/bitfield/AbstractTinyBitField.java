@@ -31,7 +31,6 @@ import org.nerd4j.lang.BitField;
  * BitField&#60;I&#62;} interface that uses a long parameter to store the bits.
  * <p>
  * Can be useful for smaller bit fields up to 64 fields.
- * </p>
  * 
  * @author Nerd4j Team
  * 
@@ -55,7 +54,6 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	 * Creates a bit filed with the maximum size (64). The
 	 * resulting bit field will be able to store <tt>64</tt>
 	 * bits.
-	 * </p>
 	 */
 	public AbstractTinyBitField()
 	{
@@ -69,7 +67,6 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	 * <p>
 	 * Creates a bit filed with the given size. The resulting bit field will be
 	 * able to store <tt>size</tt> bits.
-	 * </p>
 	 * 
 	 * @param size number of desired bits.
 	 * @throws IllegalArgumentException
@@ -85,8 +82,7 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	/**
 	 * Constructor with parameters.
 	 * <p>
-	 *  Constructs a new bit field by decoding the specified long.
-	 * </p>
+	 * Constructs a new bit field by decoding the specified long.
 	 * 
 	 * @param size number of desired bits.
 	 * @param data long containing the initial value of the bits.
@@ -119,10 +115,9 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	 * Performs the translation between the provided index
 	 * and that used internally.
 	 * <p>
-	 *  This method must return an integer in the range [0,size).
-	 *  In the other case a {@link IndexOutOfBoundsException} will
-	 *  be thrown when accessing the byte array.
-	 * </p>
+	 * This method must return an integer in the range [0,size).
+	 * In the other case a {@link IndexOutOfBoundsException} will
+	 * be thrown when accessing the byte array.
 	 * 
 	 * @param index the index to be translated.	 * 
 	 * @return the index to be used internally.
@@ -245,7 +240,7 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	 * @param index the index of the bit to read.
 	 * @return the boolean value representing the bit.
 	 * 
-	 * @throws NullPointerException if the given index is <code>null</code>.
+	 * @throws NullPointerException if the given index is {@code null}.
 	 * @throws IndexOutOfBoundsException 
 	 *         if the given index is out of the bit field limits.
 	 */
@@ -265,7 +260,7 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	 * 
 	 * @return the old value of the bit.
 	 * 
-	 * @throws NullPointerException if the given index is <code>null</code>.
+	 * @throws NullPointerException if the given index is {@code null}.
 	 * @throws IndexOutOfBoundsException 
 	 *         if the given index is out of the bit field limits.
 	 */
@@ -283,7 +278,7 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	 * @param  index the index of the bit to toggle.
 	 * @return the current value of the bit.
 	 * 
-	 * @throws NullPointerException if the given index is <code>null</code>.
+	 * @throws NullPointerException if the given index is {@code null}.
 	 * @throws IndexOutOfBoundsException 
 	 *         if the given index is out of the bit field limits.
 	 */
@@ -454,11 +449,10 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	/**
 	 * Prints a single byte of the internal byte array.
 	 * <p>
-	 *  It inverts the canonical representation of a byte
-	 *  printing the lowest-order bit in the leftmost
-	 *  position and the highest-order bit in the rightmost
-	 *  position.
-	 * </p>
+	 * It inverts the canonical representation of a byte
+	 * printing the lowest-order bit in the leftmost
+	 * position and the highest-order bit in the rightmost
+	 * position.
 	 * 
 	 * @param b    the bite to print.
 	 * @param size the number of bits to print.

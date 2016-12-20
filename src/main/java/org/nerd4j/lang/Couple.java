@@ -22,7 +22,6 @@
 package org.nerd4j.lang;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 import org.nerd4j.format.AnnotatedFormattedBean;
 import org.nerd4j.format.Formatted;
@@ -31,11 +30,11 @@ import org.nerd4j.util.HashCoder;
 /**
  * Represents a generic couple of values.
  * <p>
- *  This object is supposed to be used in combination with
- *  such classes which use {@link #hashCode()} (like {@link HashMap});
- *  The computed hash code is safe also in the case where
- *  one or both values are arrays.
- * </p>
+ * This object is supposed to be used in combination with
+ * such classes which use {@link #hashCode()}
+ * (like {@link java.util.HashMap HashMap});
+ * The computed hash code is safe also in the case where
+ * one or both values are arrays.
  * 
  * @author Nerd4j Team
  * 
@@ -130,6 +129,8 @@ public class Couple<A,B> extends AnnotatedFormattedBean
 	 * 
 	 * @param x the first element of the couple.
 	 * @param y the second element of the couple.
+	 * @param <X> type of the first element of the couple.
+	 * @param <Y> type of the second element of the couple.
 	 * 
 	 * @return the couple with the given values.
 	 */
@@ -151,7 +152,7 @@ public class Couple<A,B> extends AnnotatedFormattedBean
 	 * This method implements the deep equality, i.e. if the couple contains
 	 * arrays checks the equality of the arrays element by element.
 	 * 
-	 * @return <tt>true</tt> if the two values are equals.
+	 * @return {@code true} if the two values are equals.
 	 */
 	private boolean elementEquals( Object element, Object other )
 	{
@@ -213,7 +214,7 @@ public class Couple<A,B> extends AnnotatedFormattedBean
      * Indicates whether some other {@link Object} is "equal to" this one.
      *
      * @param obj the object to evaluate.
-     * @return <tt>true</tt> if the two values are equals.
+     * @return {@code true} if the two values are equals.
      */
     @Override
 	public boolean equals( Object obj )

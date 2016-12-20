@@ -26,14 +26,13 @@ package org.nerd4j.converter;
  * Simple implementation of the {@link BeanConverter} interface.
  * 
  * <p>
- *  This class implements all the methods declared in the
- *  {@link BeanConverter} interface and provides the following
- *  hook methods for the extending classes:
- *  <ol>
- *   <li>{@link SimpleBeanConverter#newTargetInstance()}</li>
- *   <li>{@link SimpleBeanConverter#performMapping(Object, Object)}</li>
- *  </ol>
- * </p>
+ * This class implements all the methods declared in the
+ * {@link BeanConverter} interface and provides the following
+ * hook methods for the extending classes:
+ * <ol>
+ *  <li>{@link SimpleBeanConverter#newTargetInstance()}</li>
+ *  <li>{@link SimpleBeanConverter#performMapping(Object, Object)}</li>
+ * </ol>
  * 
  * @param <S> source bean from which to get the information.
  * @param <T> target bean to fill with the information.
@@ -94,14 +93,14 @@ public abstract class SimpleBeanConverter<S,T> extends AbstractBeanConverter<S,T
     /**
      * Maps the properties of the given source bean of type {@code S}
      * into the related properties of the given target bean of type {@code T}.
+     * 
      * <p>
-     *  If all the properties are mapped successfully
-     *  the method returns {@code true} else returns {@code false}.
-     * </p>
+     * If all the properties are mapped successfully
+     * the method returns {@code true} else returns {@code false}.
+     * 
      * <p>
-     *  If the source bean or the target bean are both {@code null}
-     *  nothing will be done and the method returns {@code true}.
-     * </p>
+     * If the source bean or the target bean are both {@code null}
+     * nothing will be done and the method returns {@code true}.
      *
      * @param source the information source bean.
      * @param target the information target bean.

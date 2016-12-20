@@ -30,14 +30,13 @@ import java.util.Set;
  * Common abstract implementation of the {@link BeanConverter} interface.
  * 
  * <p>
- *  This class is common to all the bean converters.
- *  Provides a default implementation of the following methods:
- *  <ol>
- *   <li>{@link BeanConverter#convert(Set)}</li>
- *   <li>{@link BeanConverter#convert(List)}</li>
- *  </ol>
- *  used to convert collections of beans.
- * </p>
+ * This class is common to all the bean converters.
+ * Provides a default implementation of the following methods:
+ * <ol>
+ *  <li>{@link BeanConverter#convert(Set)}</li>
+ *  <li>{@link BeanConverter#convert(List)}</li>
+ * </ol>
+ * used to convert collections of beans.
  * 
  * @param <S> source bean from which to get the information.
  * @param <T> target bean to fill with the information.

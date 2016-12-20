@@ -51,14 +51,12 @@ public class ReflectionUtil
 	 * Search, in the provided class, for the desired field
 	 * with the given name and type.
 	 * <p>
-	 *  If the {@link Field} is not in the provided {@link Class}
-	 *  it will be searched in the super-class. The process proceeds
-	 *  until the class {@link Object} is reached.
-	 * </p>
+	 * If the {@link Field} is not in the provided {@link Class}
+	 * it will be searched in the super-class. The process proceeds
+	 * until the class {@link Object} is reached.
 	 * <p>
-	 *  If the searched field occurs in more than one class in the class
-	 *  hierarchy, the first occurrence found will be returned.
-	 * </p>
+	 * If the searched field occurs in more than one class in the class
+	 * hierarchy, the first occurrence found will be returned.
 	 * 
 	 * @param fieldType type of the searched field.
 	 * @param fieldName name of the searched field.
@@ -68,7 +66,7 @@ public class ReflectionUtil
 	 * 
 	 * @throws SecurityException see {@link Class#getDeclaredClasses()}
 	 * 
-	 * @throws NullPointerException if any of the parameters is <code>null</code>.
+	 * @throws NullPointerException if any of the parameters is {@code null}.
 	 */
 	public static Field findField( Class<?> fieldType, String fieldName, Class<?> clazz )
 	throws SecurityException, NullPointerException
@@ -168,7 +166,7 @@ public class ReflectionUtil
 	 * 
 	 * @return all the found fields and their respective annotations.
 	 * 
-	 * @throws NullPointerException if any of the parameters is <code>null</code>.
+	 * @throws NullPointerException if any of the parameters is {@code null}.
 	 */
 	public static <A extends Annotation> Map<Field,A> findAnnotatedFields( Class<A> annotationClass, Class<?> clazz )
 	throws NullPointerException
@@ -241,7 +239,7 @@ public class ReflectionUtil
 	 * 
 	 * @return all the found methods and their respective annotations.
 	 * 
-	 * @throws NullPointerException if any of the parameters is <code>null</code>.
+	 * @throws NullPointerException if any of the parameters is {@code null}.
 	 */
 	public static <A extends Annotation> Map<Method,A> findAnnotatedMethods( Class<A> annotationClass, Class<?> clazz )
 	throws NullPointerException
@@ -323,7 +321,7 @@ public class ReflectionUtil
 	 * 
 	 * @return the public {@link Method} if found, <tt>null</tt> otherwise.
 	 * 
-	 * @throws NullPointerException if any of the parameters is <code>null</code>.
+	 * @throws NullPointerException if any of the parameters is {@code null}.
 	 */
 	public static Method findPublicMethod( String methodName, Class<?> clazz )
 	throws NullPointerException
@@ -383,7 +381,7 @@ public class ReflectionUtil
 	 * 
 	 * @return the public {@link Method} if found, <tt>null</tt> otherwise.
 	 * 
-	 * @throws NullPointerException if any of the parameters is <code>null</code>.
+	 * @throws NullPointerException if any of the parameters is {@code null}.
 	 * @throws SecurityException see {@link Class#getDeclaredMethod(String, Class...)}.
 	 */
 	public static Method findMethod( String name, Class<?> clazz )
@@ -406,7 +404,7 @@ public class ReflectionUtil
 	 * 
 	 * @return the public {@link Method} if found, <tt>null</tt> otherwise.
 	 * 
-	 * @throws NullPointerException if any of the parameters is <code>null</code>.
+	 * @throws NullPointerException if any of the parameters is {@code null}.
 	 * @throws SecurityException see {@link Class#getDeclaredMethod(String, Class...)}.
 	 */
 	public static Method findMethod( String name, Class<?>[] parameterTypes, Class<?> clazz )
@@ -480,22 +478,21 @@ public class ReflectionUtil
 	
 
 	/**
-	 * Search, in the provided class, for an access method (so called <code>getter</code>)
+	 * Search, in the provided class, for an access method (so called {@code getter})
 	 * related to given property name.
 	 * <p>
-	 *  This method works properly if the provided {@link Class}
-	 *  is a proper class and not an interface.
-	 *  For interfaces if the method is not found on the current interface
-     *  the research will NOT be extended to super interfaces.
-	 *  Use {@link #findPublicGetter(String, Class)} instead.
-	 * </p>
+	 * This method works properly if the provided {@link Class}
+	 * is a proper class and not an interface.
+	 * For interfaces if the method is not found on the current interface
+     * the research will NOT be extended to super interfaces.
+	 * Use {@link #findPublicGetter(String, Class)} instead.
 	 *
 	 * @param property name of the property to find.
 	 * @param clazz    class into which to search.
 	 * 
 	 * @return the public {@link Method} if found, <tt>null</tt> otherwise.
 	 * 
-	 * @throws NullPointerException if any of the parameters is <code>null</code>.
+	 * @throws NullPointerException if any of the parameters is {@code null}.
 	 * @throws SecurityException see {@link Class#getDeclaredMethod(String, Class...)}.
 	 */
 	public static Method findGetter( String property, Class<?> clazz )
@@ -589,17 +586,16 @@ public class ReflectionUtil
 
 	/**
 	 * Search, in the provided class, for a public access method
-	 * (so called <code>setter</code>) related to the given property name.
+	 * (so called {@code setter}) related to the given property name.
 	 * <p>
-	 *  This method works properly for both classes and interfaces.
-	 * </p>
+	 * This method works properly for both classes and interfaces.
 	 *
 	 * @param property name of the property to find.
 	 * @param clazz    class into which to search.
 	 * 
 	 * @return the public {@link Method} if found, <tt>null</tt> otherwise.
 	 * 
-	 * @throws NullPointerException if any of the parameters is <code>null</code>.
+	 * @throws NullPointerException if any of the parameters is {@code null}.
 	 * @throws SecurityException see {@link Class#getDeclaredMethod(String, Class...)}.
 	 */
 	public static Method findPublicSetter( String property, Class<?> clazz )
@@ -697,17 +693,16 @@ public class ReflectionUtil
 	
 	/**
 	 * Search, in the provided class, for a public access method
-	 * (so called <code>getter</code>) related to the given property name.
+	 * (so called {@code getter}) related to the given property name.
 	 * <p>
-	 *  This method works properly for both classes and interfaces.
-	 * </p>
+	 * This method works properly for both classes and interfaces.
 	 *
 	 * @param property name of the property to find.
 	 * @param clazz    class into which to search.
 	 * 
 	 * @return the public {@link Method} if found, <tt>null</tt> otherwise.
 	 * 
-	 * @throws NullPointerException if any of the parameters is <code>null</code>.
+	 * @throws NullPointerException if any of the parameters is {@code null}.
 	 * @throws SecurityException see {@link Class#getDeclaredMethod(String, Class...)}.
 	 */
 	public static Method findPublicGetter( String property, Class<?> clazz )
@@ -776,8 +771,8 @@ public class ReflectionUtil
 	
 	/**
 	 * Checks if the provided class represents a boolean.
-	 * This method returns <code>true</code> if it represents
-	 * both a native  type <code>boolean</code> or a type {@link Boolean}.
+	 * This method returns {@code true} if it represents
+	 * both a native  type {@code boolean} or a type {@link Boolean}.
 
 	 * @param clazz the class to be evaluated
 	 * @return <tt>true</tt> if it represents a boolean. 
@@ -795,6 +790,12 @@ public class ReflectionUtil
 	/** Getter pattern to validate methods name and extract his related property name. */
 	private static final Pattern getterPattern = Pattern.compile("^(?:get|is)([A-Z]{1})(.*)$");
 	
+	/**
+	 * Tells if the given {@link Method} is a {@code getter}.
+	 * 
+	 * @param method method to check.
+	 * @return {@code true} if it's a {@code getter}.
+	 */
 	public static boolean isGetter( Method method )
 	{
 		
@@ -829,18 +830,17 @@ public class ReflectionUtil
 	 * <p>
 	 * Given method must be a getter:
 	 * <ul>
-	 * <li>his name must be <tt>(get|is)&#60;property_name&#62;</tt> and
-	 * property name must start with an uppercase letter (i.e.: match pattern:
-	 * <tt>^(?:get|is)([A-Z]{1})(.*)$</tt>);</li>
-	 * <li>return type must not be <tt>void</tt>;</li>
-	 * <li>no parameters.</li>
+	 *  <li>his name must be <tt>(get|is)&#60;property_name&#62;</tt> and
+	 *      property name must start with an uppercase letter (i.e.: match pattern:
+	 *       <tt>^(?:get|is)([A-Z]{1})(.*)$</tt>);</li>
+	 *  <li>return type must not be <tt>void</tt>;</li>
+	 *  <li>no parameters.</li>
 	 * </ul>
-	 * </p>
 	 * 
 	 * @param method getter method.
-	 * @return getter propery name or <code>null</code> if isn't a getter.
+	 * @return getter property name or {@code null} if isn't a getter.
 	 */
-	public static String propertyFromGetter( Method method ) throws IllegalArgumentException
+	public static String propertyFromGetter( Method method )
 	{
 		
 		/* Parameters check. */
@@ -901,14 +901,13 @@ public class ReflectionUtil
 	/**
 	 * Search, in the provided class, for the <tt>public</tt>
 	 * {@link Constructor} matching given argument values.
-	 * 
 	 * <p>
 	 * Argument values can be {@code null}, this facility will search for a no
 	 * ambiguous constructor for the data given.
-	 * </p>
 	 * 
 	 * @param clazz  class into which to search.
-	 * @param values constructor arguments
+	 * @param values constructor arguments.
+	 * @param <X> type of the {@link Constructor} to find.
 	 * 
 	 * @return found constructor or {@code null}
 	 * 
@@ -946,14 +945,13 @@ public class ReflectionUtil
 	/**
 	 * Search, in the provided class, for the <tt>public</tt>
 	 * {@link Constructor} matching given argument types.
-	 * 
 	 * <p>
 	 * Argument types can be {@code null}, this facility will search for a no
 	 * ambiguous constructor for the data given.
-	 * </p>
 	 * 
 	 * @param clazz class into which to search.
 	 * @param types constructor arguments types
+	 * @param <X> type of the {@link Constructor} to find.
 	 * 
 	 * @return found constructor or {@code null}
 	 * 

@@ -31,8 +31,13 @@ import java.util.Calendar;
 public enum TimeUnit
 {
 	
+	/** AD or BC in the Julian calendar. */
 	ERA( Calendar.ERA ),
+	
+	/** Calendar specific year number. */
     YEAR( Calendar.YEAR ),
+    
+    /** Month number in year. */
     MONTH( Calendar.MONTH ),
     
     /** Week number in year. */
@@ -41,12 +46,19 @@ public enum TimeUnit
     /** Day number in year. */
     DAY( Calendar.DAY_OF_YEAR ),
     
+    /** Hour number in day. */
     HOUR( Calendar.HOUR_OF_DAY ),
+    
+    /** Minute number in hour. */
     MINUTE( Calendar.MINUTE ),
+    
+    /** Second number in minute. */
     SECOND( Calendar.SECOND ),
+    
+    /** Milli-second number in second. */
     MILLISECOND( Calendar.MILLISECOND );
     
-    /** Codice corrispondente al dato concetto nella classe <code>java.util.Calendar</code>. */
+    /** Codice corrispondente al dato concetto nella classe {@code java.util.Calendar}. */
     private final int calendarCode;
     
     

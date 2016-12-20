@@ -31,16 +31,14 @@ import org.nerd4j.lang.ComparableInterval;
  * <p>
  * Unix dates are defined between <tt>01/01/1970 00:00:00 UTC</tt> and
  * <tt>19/01/2038 03:14:07 UTC</tt>.
- * </p>
  * 
  * <p>
  * Every period must have starting and ending dates; if missing (as in case of
  * non ending periods) the following can be used:
  * <ul>
- * <li>no start: {@link #BEGIN_OF_UNIXTIME}</li>
- * <li>no end: {@link #END_OF_UNIXTIME}</li>
+ *  <li>no start: {@link #BEGIN_OF_UNIXTIME}</li>
+ *  <li>no end: {@link #END_OF_UNIXTIME}</li>
  * </ul>
- * </p>
  * 
  * @author Nerd4j Team
  */
@@ -65,7 +63,6 @@ public class UnixTimeInterval extends ComparableInterval<Date>
 	 * <p>
 	 * Begin and end dates will be set to {@link #BEGIN_OF_UNIXTIME} and
 	 * {@link #END_OF_UNIXTIME} accordingly.
-	 * </p>
 	 */
     protected UnixTimeInterval()
     {
@@ -76,15 +73,13 @@ public class UnixTimeInterval extends ComparableInterval<Date>
     
 	/**
 	 * Creates a new {@link UnixTimeInterval} virtually without end.
-	 * 
 	 * <p>
 	 * End date will be set to {@link #END_OF_UNIXTIME}.
-	 * </p>
 	 * 
 	 * @param begin interval begin date.
 	 * 
 	 * @throws NullPointerException
-	 *             if <tt>begin</tt> parameter is <code>null</code>
+	 *             if <tt>begin</tt> parameter is {@code null}
 	 * @throws IllegalArgumentException
 	 *             if <tt>begin</tt> is before {@link #BEGIN_OF_UNIXTIME}
 	 * @throws IllegalArgumentException
@@ -104,7 +99,7 @@ public class UnixTimeInterval extends ComparableInterval<Date>
 	 * @param end   interval end date.
 	 * 
 	 * @throws NullPointerException
-	 *             if al leas one parameter is <code>null</code>
+	 *             if al leas one parameter is {@code null}
 	 * @throws IllegalArgumentException
 	 *             if <tt>begin</tt> isn't before <tt>end</tt>.
 	 * @throws IllegalArgumentException

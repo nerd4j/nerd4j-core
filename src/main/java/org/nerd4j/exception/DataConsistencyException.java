@@ -24,12 +24,11 @@ package org.nerd4j.exception;
 import org.nerd4j.util.DataConsistency;
 
 /**
- * <code>DataConsistencyException</code> is an error caused by a data inconsistency.
+ * {@code DataConsistencyException} is an error caused by a data inconsistency.
  * 
  * <p>
  * Should be used when some data or input doesn't satisfy expected characteristics as
  * used by {@link DataConsistency} class methods.
- * </p>
  * 
  * @author Nerd4j Team
  */
@@ -59,7 +58,7 @@ public class DataConsistencyException extends RuntimeException
 
     /**
 	 * Constructs a new exception with the specified cause and a detail message
-	 * of <code>(cause==null ? null : cause.toString())</code>.
+	 * of {@code (cause==null ? null : cause.toString())}.
 	 * 
 	 * @param cause
 	 *            the cause (which is saved for later retrieval by the
@@ -78,7 +77,7 @@ public class DataConsistencyException extends RuntimeException
     /**
 	 * Constructs a new exception with the specified detail message and cause.
 	 * <p>
-	 * Note that the detail message associated with <code>cause</code> is
+	 * Note that the detail message associated with {@code cause} is
 	 * <i>not</i> automatically incorporated in this exception's detail message.
 	 * 
 	 * @param message

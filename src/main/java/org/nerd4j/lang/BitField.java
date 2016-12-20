@@ -27,9 +27,8 @@ package org.nerd4j.lang;
  * Represents a bit field, most commonly used to represent integral types
  * of known and fixed bit-width.
  * <p>
- *  Given a fixed number of ordered elements, {@link BitField} associates
- *  to the index of each element a related <code>boolean</code> value.
- * </p>
+ * Given a fixed number of ordered elements, {@link BitField} associates
+ * to the index of each element a related {@code boolean} value.
  * 
  * @param <I> type of the index used to access the field.
  * 
@@ -44,7 +43,7 @@ public interface BitField<I>
 	 * @param index the index of the bit to read.
 	 * @return the boolean value representing the bit.
 	 * 
-	 * @throws NullPointerException if the given index is <code>null</code>.
+	 * @throws NullPointerException if the given index is {@code null}.
 	 * @throws IndexOutOfBoundsException 
 	 *         if the given index is out of the bit field limits.
 	 */
@@ -58,7 +57,7 @@ public interface BitField<I>
 	 * 
 	 * @return the old value of the bit.
 	 * 
-	 * @throws NullPointerException if the given index is <code>null</code>.
+	 * @throws NullPointerException if the given index is {@code null}.
 	 * @throws IndexOutOfBoundsException 
 	 *         if the given index is out of the bit field limits.
 	 */
@@ -70,7 +69,7 @@ public interface BitField<I>
 	 * @param  index the index of the bit to toggle.
 	 * @return the value of the bit after toggle.
 	 * 
-	 * @throws NullPointerException if the given index is <code>null</code>.
+	 * @throws NullPointerException if the given index is {@code null}.
 	 * @throws IndexOutOfBoundsException 
 	 *         if the given index is out of the bit field limits.
 	 */

@@ -60,7 +60,6 @@ public class ConverterIterator<S,T> implements Iterator<T>
 	 * <p>
 	 * Conversion failures will be propagated from methods {@link #hasNext()}
 	 * and {@link #next()}.
-	 * </p>
 	 * 
 	 * @param converter bean converter
 	 * @param iterator  bean data source
@@ -127,7 +126,6 @@ public class ConverterIterator<S,T> implements Iterator<T>
 	 * {@inheritDoc}
 	 * <p>
 	 * Remove operation not supported.
-	 * </p>
 	 */
 	@Override
 	public void remove()

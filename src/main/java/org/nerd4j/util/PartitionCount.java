@@ -32,20 +32,17 @@ import java.util.concurrent.atomic.AtomicInteger;
  * and the number of elements in each subset.
  * 
  * <p>
- *  This class assumes that the relation between the elements of the
- *  set induces a partition such that the sum of the elements in each
- *  subset equals to the total number of elements in the set.
- * </p>
+ * This class assumes that the relation between the elements of the
+ * set induces a partition such that the sum of the elements in each
+ * subset equals to the total number of elements in the set.
  * 
  * <p>
- *  All operations in this class are {@code thread-safe}.
- * </p>
+ * All operations in this class are {@code thread-safe}.
  * 
  * <p>
- *  <b>NOTE</b>: Currently synchronization is very coarse should be refined.
- * </p>
+ * <b>NOTE</b>: Currently synchronization is very coarse should be refined.
  * 
- * <B> class representing each block in the partition.
+ * @param <B> class representing each block in the partition.
  * 
  * @author Nerd4j Team
  */
@@ -180,8 +177,7 @@ public class PartitionCount<B>
     /**
      * Adds a new element to the count related to the given block.
      * <p>
-     *  This method is not {@code thread-safe}.
-     * </p>
+     * This method is not {@code thread-safe}.
      * 
      * @param  block the block to update.
      * @return new number of elements.
@@ -212,8 +208,7 @@ public class PartitionCount<B>
     /**
      * Removes an element from the count related to the given block.
      * <p>
-     *  This method is not {@code thread-safe}.
-     * </p>
+     * This method is not {@code thread-safe}.
      * 
      * @param  block the block to update.
      * @return new number of elements.

@@ -36,7 +36,6 @@ import org.slf4j.LoggerFactory;
  * This class is very similar to {@link ConverterIterator} but it differs for
  * accepted {@link BeanConverter}. Converters from bean to collection of bean
  * are accepted
- * </p>
  * 
  * @param <S> source bean from which to get the information.
  * @param <T> target bean to fill with the information.
@@ -72,7 +71,6 @@ public class CollectionConverterIterator<S,T> implements Iterator<T>
 	 * <p>
 	 * Conversion failures will be propagated from methods {@link #hasNext()}
 	 * and {@link #next()}.
-	 * </p>
 	 * 
 	 * @param converter bean converter
 	 * @param iterator  bean data source
@@ -135,7 +133,6 @@ public class CollectionConverterIterator<S,T> implements Iterator<T>
 	 * {@inheritDoc}
 	 * <p>
 	 * Remove operation not supported.
-	 * </p>
 	 */
 	@Override
 	public void remove()

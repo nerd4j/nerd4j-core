@@ -31,9 +31,8 @@ import org.nerd4j.lang.BitField;
  * interface that uses a byte array to store the bits.
  * 
  * <p>
- *  The size of the bit array is set to the minimum size needed to contain
- *  the desired amount of bits. 
- * </p>
+ * The size of the bit array is set to the minimum size needed to contain
+ * the desired amount of bits. 
  * 
  * @author Nerd4j Team
  * 
@@ -47,18 +46,17 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	
 	/**
 	 * Size of the bit field, must be in the range:
-	 * <code>(data.length - 1 * 8, data.length * 8]</code>.
+	 * {@code (data.length - 1 * 8, data.length * 8]}.
 	 */
 	private final int size;
 	
 	/**
 	 * Byte array to hold the values ​​of the bits. The data will be organized
 	 * as follows: the bit with index x will be in the position
-	 * <code>x % 8</code> of the byte <code>data[x/8]</code>.
+	 * {@code x % 8} of the byte {@code data[x/8]}.
 	 * <p>
-	 *  This field cannot be <code>final</code> because it is modified by the
-	 *  method {@link AbstractBitField#clone()}.
-	 * </p>
+	 * This field cannot be {@code final} because it is modified by the
+	 * method {@link AbstractBitField#clone()}.
 	 */
 	private byte[] data;
 
@@ -66,10 +64,9 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	/**
 	 * Constructor with parameters.
 	 * <p>
-	 *  Creates a bit filed with the given size.
-	 *  The resulting bit field will be able to store
-	 *  <tt>size</tt> bits.
-	 * </p>
+	 * Creates a bit filed with the given size.
+	 * The resulting bit field will be able to store
+	 * <tt>size</tt> bits.
 	 * 
 	 * @param size number of desired bits. 
 	 * @throws IllegalArgumentException if the size is not strict positive.
@@ -97,14 +94,13 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	/**
 	 * Constructor with parameters.
 	 * <p>
-	 *  Constructs a new bit field by decoding the specified array of bytes.
-     *  If the provided byte array is valid and not null it will be copied
-     *  into the bit field structure.
-	 * </p>
+	 * Constructs a new bit field by decoding the specified array of bytes.
+     * If the provided byte array is valid and not null it will be copied
+     * into the bit field structure.
+     * 
 	 * <p>
-	 *  The provided copy if the byte array will not be used to prevent
-	 *  unexpected changes of the internal data.
-	 * </p>
+	 * The provided copy if the byte array will not be used to prevent
+	 * unexpected changes of the internal data.
 	 * 
 	 * @param data byte array containing the initial value of the bits.
 	 * @throws IllegalArgumentException if the provided byte array is null or empty.
@@ -130,16 +126,15 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	/**
 	 * Constructor with parameters.
 	 * <p>
-	 *  Constructs a new bit field, whith the given size,
-	 *  by decoding the specified array of bytes.
-     *  The provided byte array must be valid and not null and
-     *  the given size nust be strict positiveand not exceed 
-     *  the number of bits representable by the byte array.
-	 * </p>
+	 * Constructs a new bit field, with the given size,
+	 * by decoding the specified array of bytes.
+     * The provided byte array must be valid and not null and
+     * the given size must be strict positive and not exceed
+     * the number of bits representable by the byte array.
+     * 
 	 * <p>
-	 *  The provided copy if the byte array will not be used to prevent
-	 *  unexpected changes of the internal data.
-	 * </p>
+	 * The provided copy if the byte array will not be used to prevent
+	 * unexpected changes of the internal data.
 	 * 
 	 * @param size number of desired bits. 
 	 * @param data byte array containing the initial value of the bits.
@@ -179,10 +174,9 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	 * Performs the translation between the provided index
 	 * and that used internally.
 	 * <p>
-	 *  This method must return an integer in the range [0,size).
-	 *  In the other case a {@link IndexOutOfBoundsException} will
-	 *  be thrown when accessing the byte array.
-	 * </p>
+	 * This method must return an integer in the range [0,size).
+	 * In the other case a {@link IndexOutOfBoundsException} will
+	 * be thrown when accessing the byte array.
 	 * 
 	 * @param index the index to be translated.	 * 
 	 * @return the index to be used internally.
@@ -204,7 +198,7 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	 * @param data byte array used to store data.
 	 * @param size desired number of bits.
 	 * 
-	 * @return <code>true</code> if the byte array capacity fits the desired size.
+	 * @return {@code true} if the byte array capacity fits the desired size.
 	 */
 	private boolean checkCapacity( byte[] data, int size )
 	{
@@ -261,14 +255,14 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	}
 	
 	/**
-	 * Returns <code>true</code> if the bit in the given position
-	 * is set to 1, <code>false</code> otherwise.
+	 * Returns {@code true} if the bit in the given position
+	 * is set to 1, {@code false} otherwise.
 	 * 
 	 * @param data     the byte containing the bit to evaluate.
 	 * @param position the position of the bit in range [0,8).
 	 *            
-	 * @return <code>true</code> if the bit value is 1;<br />
-	 *         <code>false</code> otherwise.
+	 * @return {@code true} if the bit value is 1;<br />
+	 *         {@code false} otherwise.
 	 */
 	private boolean boolAtPosition( byte data, int position )
 	{
@@ -382,7 +376,7 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	 * @param index the index of the bit to read.
 	 * @return the boolean value representing the bit.
 	 * 
-	 * @throws NullPointerException if the given index is <code>null</code>.
+	 * @throws NullPointerException if the given index is {@code null}.
 	 * @throws IndexOutOfBoundsException 
 	 *         if the given index is out of the bit field limits.
 	 */
@@ -402,7 +396,7 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	 * 
 	 * @return the old value of the bit.
 	 * 
-	 * @throws NullPointerException if the given index is <code>null</code>.
+	 * @throws NullPointerException if the given index is {@code null}.
 	 * @throws IndexOutOfBoundsException 
 	 *         if the given index is out of the bit field limits.
 	 */
@@ -420,7 +414,7 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	 * @param  index the index of the bit to toggle.
 	 * @return the current value of the bit.
 	 * 
-	 * @throws NullPointerException if the given index is <code>null</code>.
+	 * @throws NullPointerException if the given index is {@code null}.
 	 * @throws IndexOutOfBoundsException 
 	 *         if the given index is out of the bit field limits.
 	 */
@@ -450,9 +444,8 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	 * byte array to completely separate the new instance
 	 * from its parent.
 	 * <p>
-	 *  This method will not throw a {@link CloneNotSupportedException}
-	 *  because the this class implements {@link Cloneable}.
-	 * </p>
+	 * This method will not throw a {@link CloneNotSupportedException}
+	 * because the this class implements {@link Cloneable}.
 	 */
 	@Override
 	public AbstractBitField<I> clone()
@@ -486,9 +479,8 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	/**
 	 * Returns a byte array representation of this bit field.
 	 * <p>
-	 *  Actually this method makes a copy of the byte array
-	 *  internally used to store the bits.
-	 * </p>
+	 * Actually this method makes a copy of the byte array
+	 * internally used to store the bits.
 	 * 
 	 * @return byte array representation of this bit field.
 	 */
@@ -573,11 +565,10 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	/**
 	 * Prints a single byte of the internal byte array.
 	 * <p>
-	 *  It inverts the canonical representation of a byte
-	 *  printing the lowest-order bit in the leftmost
-	 *  position and the highest-order bit in the rightmost
-	 *  position.
-	 * </p>
+	 * It inverts the canonical representation of a byte
+	 * printing the lowest-order bit in the leftmost
+	 * position and the highest-order bit in the rightmost
+	 * position.
 	 * 
 	 * @param b    the bite to print.
 	 * @param size the number of bits to print.

@@ -34,7 +34,6 @@ import java.lang.annotation.Target;
  * <p>
  * This annotation can be placed on fields or getters. Where is found rules how
  * instances to print will be accessed.
- * </p>
  * 
  * @author Nerd4j Team
  */
@@ -52,7 +51,8 @@ public @interface Formatted
 	 * property path is not valued the inferred property name from annotated
 	 * field or method will be used instead. This behavior can be overridden by
 	 * exploiting this field.
-	 * </p>
+	 * 
+	 * @return the alternative key to print.
 	 */
 	String key() default "";
 
@@ -60,12 +60,10 @@ public @interface Formatted
 	 * (Optional) Value to be printed.
 	 * 
 	 * <p>
-	 *  The default value matches the whole property (i.e.: will be used all
-	 *  the identified bean for printing the output); of such bean can be
-	 *  used only one property or a chain of properties.
-	 * </p>
+	 * The default value matches the whole property (i.e.: will be used all
+	 * the identified bean for printing the output); of such bean can be
+	 * used only one property or a chain of properties.
 	 * 
-	 * <p>
 	 * <pre>
 	 *    Example 1: the following annotations are equal
 	 * 
@@ -85,18 +83,22 @@ public @interface Formatted
 	 *    &#064;Formatted(value="aProperty.anotherProperty")
 	 *    private MyObject myObject;
 	 * </pre>
-	 * </p>
 	 * 
+	 * @return the value to print.
 	 */
 	String value() default "";
 
 	/**
 	 * (Optional) Token separator.
+	 * 
+	 * @return the token separator.
 	 */
 	String tokenSeparator() default ", ";
 
 	/**
 	 * (Optional) key - value separator.
+	 * 
+	 * @return the value separator.
 	 */
 	String valueSeparator() default "=";
 

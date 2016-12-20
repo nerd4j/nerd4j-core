@@ -26,19 +26,23 @@ import java.util.NoSuchElementException;
 
 
 /**
- * Simple {@link Iterator} <tt>EmptyObject</tt> pattern implementation
+ * Simple {@link Iterator} {@code EmptyObject} pattern implementation.
  * 
- * @author @author Nerd4j Team
+ * @param <E> type of objects returned by the {@link Iterator}.
+ *  
+ * @author Nerd4j Team
  */
 public final class EmptyIterator<E> implements Iterator<E>
 {
 	
-	/** <i>Singleton</i> instance */
+	/** {@code Singleton} instance */
 	private static final Iterator<?> INSTANCE = new EmptyIterator<Object>();
 	
 	
 	/**
-	 * <i>Singleton</i> factory method.
+	 * {@code Singleton} factory method.
+	 * 
+	 * @param <X> type returned by the {@link Iterator}
 	 * @return an empty iterator
 	 */
 	@SuppressWarnings("unchecked")
@@ -93,7 +97,6 @@ public final class EmptyIterator<E> implements Iterator<E>
 	 * {@inheritDoc}
 	 * <p>
 	 * Remove operation not supported.
-	 * </p>
 	 */
 	@Override
 	public void remove()

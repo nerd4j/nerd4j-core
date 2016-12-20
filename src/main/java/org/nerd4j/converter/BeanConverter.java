@@ -30,11 +30,10 @@ import java.util.Set;
  * {@code Java Bean} with a different format.
  * 
  * <p>
- *  This class is expected to handle  {@code Java Bean}s.
- *  As defined in the Java specifications, a {@code Java Bean}
- *  must always provide a public default constructor and public
- *  access method (so called {@code getter}s and {@code setter}s).
- * </p>
+ * This class is expected to handle  {@code Java Bean}s.
+ * As defined in the Java specifications, a {@code Java Bean}
+ * must always provide a public default constructor and public
+ * access method (so called {@code getter}s and {@code setter}s).
  * 
  * @param <S> source bean from which to get the information.
  * @param <T> target bean to fill with the information.
@@ -49,8 +48,7 @@ public interface BeanConverter<S,T>
 	 * with the informations provided by the source bean
 	 * of type {@code S}.
 	 * <p>
-	 *  If the source bean is {@code null} returns {@code null}.
-	 * </p>
+	 * If the source bean is {@code null} returns {@code null}.
      *
      * @param source the information source bean.
      * @return the information target bean.
@@ -61,9 +59,9 @@ public interface BeanConverter<S,T>
 	 * Creates and fills a {@link Set} of target beans of type {@code T}
 	 * with the informations provided by the {@link Set} of source bean
 	 * of type {@code S}.
+	 * 
 	 * <p>
-	 *  If the source {@link Set} is {@code null} returns {@code null}.
-	 * </p>
+	 * If the source {@link Set} is {@code null} returns {@code null}.
      *
      * @param source the information source {@link Set}.
      * @return the information target {@link Set}.
@@ -74,9 +72,9 @@ public interface BeanConverter<S,T>
 	 * Creates and fills a {@link List} of target beans of type {@code T}
 	 * with the informations provided by the {@link List} of source bean
 	 * of type {@code S}.
+	 * 
 	 * <p>
-	 *  If the source {@link List} is {@code null} returns {@code null}.
-	 * </p>
+	 * If the source {@link List} is {@code null} returns {@code null}.
      *
      * @param source the information source {@link List}.
      * @return the information target {@link List}.

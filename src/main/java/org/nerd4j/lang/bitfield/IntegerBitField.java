@@ -37,11 +37,11 @@ public class IntegerBitField extends AbstractBitField<Integer>
 	
 	/**
 	 * Constructor with parameters.
+	 * 
 	 * <p>
-	 *  Creates a bit filed with the given size.
-	 *  The resulting bit field will be able to store
-	 *  <tt>size</tt> bits.
-	 * </p>
+	 * Creates a bit filed with the given size.
+	 * The resulting bit field will be able to store
+	 * {@code size} bits.
 	 * 
 	 * @param size number of desired bits. 
 	 * @throws IllegalArgumentException if the size is not strict positive.
@@ -57,14 +57,12 @@ public class IntegerBitField extends AbstractBitField<Integer>
 	/**
 	 * Constructor with parameters.
 	 * <p>
-	 *  Constructs a new bit field by decoding the specified array of bytes.
-     *  If the provided byte array is valid and not null it will be copied
-     *  into the bit field structure.
-	 * </p>
+	 * Constructs a new bit field by decoding the specified array of bytes.
+     * If the provided byte array is valid and not null it will be copied
+     * into the bit field structure.
 	 * <p>
-	 *  The provided copy if the byte array will not be used to prevent
-	 *  unexpected changes of the internal data.
-	 * </p>
+	 * The provided copy if the byte array will not be used to prevent
+	 * unexpected changes of the internal data.
 	 * 
 	 * @param data byte array containing the initial value of the bits.
 	 * @throws IllegalArgumentException if the provided byte array is null or empty.
@@ -80,16 +78,14 @@ public class IntegerBitField extends AbstractBitField<Integer>
 	/**
 	 * Constructor with parameters.
 	 * <p>
-	 *  Constructs a new bit field, whith the given size,
-	 *  by decoding the specified array of bytes.
-     *  The provided byte array must be valid and not null and
-     *  the given size nust be strict positiveand not exceed 
-     *  the number of bits representable by the byte array.
-	 * </p>
+	 * Constructs a new bit field, whith the given size,
+	 * by decoding the specified array of bytes.
+     * The provided byte array must be valid and not null and
+     * the given size nust be strict positiveand not exceed 
+     * the number of bits representable by the byte array.
 	 * <p>
 	 *  The provided copy if the byte array will not be used to prevent
 	 *  unexpected changes of the internal data.
-	 * </p>
 	 * 
 	 * @param size number of desired bits. 
 	 * @param data byte array containing the initial value of the bits.
@@ -113,10 +109,9 @@ public class IntegerBitField extends AbstractBitField<Integer>
 	 * Performs the translation between the provided index
 	 * and that used internally.
 	 * <p>
-	 *  This method must return an integer in the range [0,size).
-	 *  In the other case a {@link IndexOutOfBoundsException} will
-	 *  be thrown when accessing the byte array.
-	 * </p>
+	 * This method must return an integer in the range [0,size).
+	 * In the other case a {@link IndexOutOfBoundsException} will
+	 * be thrown when accessing the byte array.
 	 * 
 	 * @param index the index to be translated.	 * 
 	 * @return the index to be used internally.

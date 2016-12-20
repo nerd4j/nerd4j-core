@@ -41,6 +41,7 @@ public class EqualsUtils
 	 *  
 	 * @param otherObj  the object with which to compare.
 	 * @param thisClass the class the {@code otherObj} needs to have.
+	 * @param <Type> the returned type.
 	 * @return the {@code otherObj} casted to the right class if possible, {@code null} otherwise.
 	 */
 	@SuppressWarnings("unchecked")
@@ -62,6 +63,7 @@ public class EqualsUtils
 	 *  
 	 * @param otherObj  the object with which to compare.
 	 * @param thisClass the class the {@code otherObj} needs to have.
+	 * @param <Type> the returned type.
 	 * @return the {@code otherObj} casted to the right class if possible, {@code null} otherwise.
 	 */
 	@SuppressWarnings("unchecked")
@@ -81,16 +83,16 @@ public class EqualsUtils
      * and tells if the field of {@code thisObject} equals to the related field
      * of the {@code otherObject}.
      * <p>
-     *  <b>Note</b>
-     *  This method checks equality by invoking
-     *  the {@link #equals(Object)} method on the
-     *  given objects, so it can't be used to check
-     *  {@code thisObject} and the {@code otherObject}
-     *  itself.
-     * </p>
+     * <b>Note</b>
+     * This method checks equality by invoking
+     * the {@link #equals(Object)} method on the
+     * given objects, so it can't be used to check
+     * {@code thisObject} and the {@code otherObject}
+     * itself.
      * 
      * @param thisField  field of  {@code thisObject}.
      * @param otherField related field of the {@code otherObject}.
+     * @param <Field> the type of the fields to check.
      * @return {@code true} if the two fields are equal.
      */
     public static <Field> boolean equalsFields( Field thisField, Field otherField )
@@ -123,14 +125,14 @@ public class EqualsUtils
      *  This method is intended to be used inside a {@link Object#equals(Object)}
      * and tells if the list of related fields are equals.
 	 * <p>
-	 *  The list of arguments must be in the form:
-	 *  {@code thisFieldA, otherFieldA, thisFieldB, otherFieldB, ...}
-	 *  otherwise the method will not be able to perform the check properly.
-	 * </p>
+	 * The list of arguments must be in the form:
+	 * {@code thisFieldA, otherFieldA, thisFieldB, otherFieldB, ...}
+	 * otherwise the method will not be able to perform the check properly.
 	 * 
 	 * @param thisField  field of  {@code thisObject}.
      * @param otherField related field of the {@code otherObject}.
      * @param others     the other pairs {@code <thisField,otherField>}.
+     * @param <Field> the type of the fields to check.
 	 * @return {@code true} if the given objects are two by two equal.
 	 * @throws IllegalArgumentException If the number of arguments is inconsistent.
 	 */
@@ -157,21 +159,20 @@ public class EqualsUtils
      * and tells if the field of {@code thisObject} equals to the related field
      * of the {@code otherObject}.
      * <p>
-     *  If the given objects are {@link Iterable} or
-     *  they are arrays this method iterates the
-     *  process to each contained element. 
-     * </p>
+     * If the given objects are {@link Iterable} or
+     * they are arrays this method iterates the
+     * process to each contained element. 
      * <p>
-     *  <b>Note</b>
-     *  This method checks equality by invoking
-     *  the {@link #equals(Object)} method on the
-     *  given objects, so it can't be used to check
-     *  {@code thisObject} and the {@code otherObject}
-     *  itself.
-     * </p>
+     * <b>Note</b>
+     * This method checks equality by invoking
+     * the {@link #equals(Object)} method on the
+     * given objects, so it can't be used to check
+     * {@code thisObject} and the {@code otherObject}
+     * itself.
      * 
      * @param thisField  field of  {@code thisObject}.
      * @param otherField related field of the {@code otherObject}.
+     * @param <Field> the type of the fields to check.
      * @return {@code true} if the two fields are equal.
      */
     public static <Field> boolean deepEqualsFields( Field thisField, Field otherField )
@@ -204,19 +205,18 @@ public class EqualsUtils
      *  This method is intended to be used inside a {@link Object#equals(Object)}
      * and tells if the list of related fields are equals.
 	 * <p>
-	 *  The list of arguments must be in the form:
-	 *  {@code thisFieldA, otherFieldA, thisFieldB, otherFieldB, ...}
-	 *  otherwise the method will not be able to perform the check properly.
-	 * </p>
+	 * The list of arguments must be in the form:
+	 * {@code thisFieldA, otherFieldA, thisFieldB, otherFieldB, ...}
+	 * otherwise the method will not be able to perform the check properly.
 	 * <p>
-     *  If some of the given fields are {@link Iterable} or
-     *  arrays this method iterates the process to each
-     *  contained element. 
-     * </p>
+     * If some of the given fields are {@link Iterable} or
+     * arrays this method iterates the process to each
+     * contained element. 
 	 * 
 	 * @param thisField  field of  {@code thisObject}.
      * @param otherField related field of the {@code otherObject}.
      * @param others     the other pairs {@code <thisField,otherField>}.
+     * @param <Field> the type of the fields to check.
 	 * @return {@code true} if the given objects are two by two equal.
 	 * @throws IllegalArgumentException If the number of arguments is inconsistent.
 	 */

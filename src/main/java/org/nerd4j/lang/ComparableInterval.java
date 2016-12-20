@@ -27,12 +27,13 @@ package org.nerd4j.lang;
  * that handles any type of {@link Comparable} data.
  * 
  * <p>
- *  If for a specific implementation of {@link Comparable}
- *  the {@link Comparable#compareTo(Object)} method is too
- *  heavy it is recommended to create an ad hoc extension
- *  of the {@link AbstractInterval} class instead of using
- *  this one.
- * </p>
+ * If for a specific implementation of {@link Comparable}
+ * the {@link Comparable#compareTo(Object)} method is too
+ * heavy it is recommended to create an ad hoc extension
+ * of the {@link AbstractInterval} class instead of using
+ * this one.
+ * 
+ * @param <T> type on {@link Comparable} objects in the interva.
  * 
  * @author Nerd4j Team
  */

@@ -40,7 +40,6 @@ public class IntegerTinyBitField extends AbstractTinyBitField<Integer>
 	 * Creates a bit filed with the maximum size (64). The
 	 * resulting bit field will be able to store <tt>64</tt>
 	 * bits.
-	 * </p>
 	 */
 	public IntegerTinyBitField()
 	{
@@ -52,7 +51,6 @@ public class IntegerTinyBitField extends AbstractTinyBitField<Integer>
 	 * <p>
 	 * Creates a bit filed with the given size. The resulting bit field will be
 	 * able to store <tt>size</tt> bits.
-	 * </p>
 	 * 
 	 * @param size number of desired bits.
 	 * @throws IllegalArgumentException
@@ -66,8 +64,7 @@ public class IntegerTinyBitField extends AbstractTinyBitField<Integer>
 	/**
 	 * Constructor with parameters.
 	 * <p>
-	 *  Constructs a new bit field by decoding the specified long.
-	 * </p>
+	 * Constructs a new bit field by decoding the specified long.
 	 * 
 	 * @param size number of desired bits.
 	 * @param data long containing the initial value of the bits.
@@ -87,10 +84,9 @@ public class IntegerTinyBitField extends AbstractTinyBitField<Integer>
 	 * Performs the translation between the provided index
 	 * and that used internally.
 	 * <p>
-	 *  This method must return an integer in the range [0,size).
-	 *  In the other case a {@link IndexOutOfBoundsException} will
-	 *  be thrown when accessing the byte array.
-	 * </p>
+	 * This method must return an integer in the range [0,size).
+	 * In the other case a {@link IndexOutOfBoundsException} will
+	 * be thrown when accessing the byte array.
 	 * 
 	 * @param index the index to be translated.	 * 
 	 * @return the index to be used internally.

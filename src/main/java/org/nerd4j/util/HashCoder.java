@@ -69,10 +69,9 @@ public class HashCoder
 	 * Creates an hash code based on a given prime number
 	 * and a given base object.
 	 * <p>
-	 *  It works in the same way as {@link HashCoder#hashCode(int,int)}
-	 *  using the {@link Object#hashCode()} method of the given object
-	 *  as base.
-	 * </p>
+	 * It works in the same way as {@link HashCoder#hashCode(int,int)}
+	 * using the {@link Object#hashCode()} method of the given object
+	 * as base.
 	 * 
 	 * @param prime a number supposed to be prime.
 	 * @param base  an object to combine with the prime.
@@ -99,9 +98,8 @@ public class HashCoder
 	 * Creates an hash code based on a given prime number,
 	 * a base object and an arbitrary long series of offset objects.
 	 * <p>
-	 *  It creates an hash code that is combination of the
-	 *  provided objects and the prime number.
-	 * </p>
+	 * It creates an hash code that is combination of the
+	 * provided objects and the prime number.
 	 * 
 	 * @param prime   a number supposed to be prime.
 	 * @param base    an object to combine with the prime.
@@ -129,9 +127,8 @@ public class HashCoder
      * Creates an hash code based on a given prime number
      * and a given iterable object.
      * <p>
-     *  The returned value is based on the contents of the specified iterable object.
-     *  This method interpolates the hash codes of each element in the iterable object.
-     * </p>
+     * The returned value is based on the contents of the specified iterable object.
+     * This method interpolates the hash codes of each element in the iterable object.
      * 
      * @param prime a number supposed to be prime.
      * @param iterable  an iterable object to combine with the prime.

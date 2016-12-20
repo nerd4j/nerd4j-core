@@ -26,10 +26,11 @@ package org.nerd4j.lang;
  * and an {@code end} value excluded.
  * 
  * <p>
- *  Note: All the implementations of this interface must grant
- *        that the {@code begin} value is strictly smaller than
- *        the {@code end} value.
- * </p>
+ * Note: All the implementations of this interface must grant
+ *       that the {@code begin} value is strictly smaller than
+ *       the {@code end} value.
+ * 
+ * @param <T> type of the objects in the interval.
  * 
  * @author Nerd4j Team
  */
@@ -54,7 +55,7 @@ public interface Interval<T>
 	 * Checks if the given value is within interval.
 	 * 
 	 * @param value    the value to check.
-	 * @return {@code true} if the value belongs to the interval;<br/>
+	 * @return {@code true} if the value belongs to the interval;<br>
 	 *         {@code false} otherwise.
 	 */
 	public boolean isInRange( T value );
@@ -64,7 +65,7 @@ public interface Interval<T>
 	 * one value in common.
 	 * 
 	 * @param interval the interval to check against this.
-	 * @return {@code true} if there is at least one value in common;<br/>
+	 * @return {@code true} if there is at least one value in common;<br>
 	 *         {@code false} otherwise.
 	 */
 	public boolean overlaps( Interval<T> interval );
@@ -73,7 +74,7 @@ public interface Interval<T>
 	 * Checks if the given interval is included in this one.
 	 * 
 	 * @param interval the interval to check against this.
-	 * @return {@code true} if the given interval is included in this one;<br/>
+	 * @return {@code true} if the given interval is included in this one;<br>
 	 *         {@code false} otherwise.
 	 */
 	public boolean includes( Interval<T> interval );
