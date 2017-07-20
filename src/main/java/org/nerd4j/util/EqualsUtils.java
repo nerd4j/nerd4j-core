@@ -136,7 +136,7 @@ public class EqualsUtils
 	 * @return {@code true} if the given objects are two by two equal.
 	 * @throws IllegalArgumentException If the number of arguments is inconsistent.
 	 */
-    public static <Field> boolean equalsFields( Field thisField, Field otherField, Field... others )
+    public static <Field> boolean equalsFields( Field thisField, Field otherField, Object... others )
     {
 
    		if( others != null && others.length % 2 != 0 )
@@ -220,7 +220,7 @@ public class EqualsUtils
 	 * @return {@code true} if the given objects are two by two equal.
 	 * @throws IllegalArgumentException If the number of arguments is inconsistent.
 	 */
-    public static <Field> boolean deepEqualsFields( Field thisField, Field otherField, Field... others )
+    public static <Field> boolean deepEqualsFields( Field thisField, Field otherField, Object... others )
     {
     	
     	if( others != null && others.length % 2 == 1 )
