@@ -21,26 +21,24 @@
  */
 package org.nerd4j.exception;
 
-import org.nerd4j.util.DataConsistency;
 
 /**
- * {@code DataConsistencyException} is an error caused by a data inconsistency.
+ * This error is created by the {{@link org.nerd4j.util.Require} utility
+ * class if a given requirement fails.
  * 
  * <p>
- * Should be used when some data or input doesn't satisfy expected characteristics as
- * used by {@link DataConsistency} class methods.
+ * Is intended to be thrown if parameter validation fails in methods and
+ * constructors.
  * 
  * @author Nerd4j Team
- * @deprecated because {@link org.nerd4j.util.DataConsistency} is also deprecated.
  * @since 1.1.1
  */
-@Deprecated
-public class DataConsistencyException extends RuntimeException
+public class RequirementFailure extends RuntimeException
 {
 	
 	/** Generated Serial Version UID. */
-	private static final long serialVersionUID = -5804962294335546644L;
-
+	private static final long serialVersionUID = 1L;
+	
 
 	/**
 	 * Constructs a new exception with the specified detail message. The cause
@@ -51,7 +49,7 @@ public class DataConsistencyException extends RuntimeException
 	 *            the detail message. The detail message is saved for later
 	 *            retrieval by the {@link #getMessage()} method.
 	 */
-    public DataConsistencyException( String message )
+    public RequirementFailure( String message )
     {
 
         super( message );
@@ -69,7 +67,7 @@ public class DataConsistencyException extends RuntimeException
 	 *            permitted, and indicates that the cause is nonexistent or
 	 *            unknown.)
 	 */
-    public DataConsistencyException( Throwable cause )
+    public RequirementFailure( Throwable cause )
     {
 
         super( cause );
@@ -92,7 +90,7 @@ public class DataConsistencyException extends RuntimeException
 	 *            permitted, and indicates that the cause is nonexistent or
 	 *            unknown.)
 	 */
-    public DataConsistencyException( String message, Throwable cause )
+    public RequirementFailure( String message, Throwable cause )
     {
 
         super( message, cause );

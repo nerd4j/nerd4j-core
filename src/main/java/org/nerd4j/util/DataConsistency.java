@@ -30,7 +30,10 @@ import org.nerd4j.exception.DataConsistencyException;
  * Utility class useful to quickly perform data consistency checks.
  * 
  * @author Nerd4j Team
+ * @deprecated use {@link org.nerd4j.util.Require} instead.
+ * @since 1.1.1
  */
+@Deprecated
 public class DataConsistency
 {
 
