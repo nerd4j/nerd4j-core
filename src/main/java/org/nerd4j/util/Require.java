@@ -209,7 +209,7 @@ public class Require
     public static String nonEmpty( String value, String message )
     {
     	
-        if( value == null )
+        if( value == null || value.isEmpty() )
             throw new RequirementFailure( PREFIX + message );
         
         return value;
@@ -236,7 +236,7 @@ public class Require
      */
     public static String nonEmpty( String value, Supplier<String> messageSupplier )
     {
-        if( value == null )
+        if( value == null || value.isEmpty() )
             throw new RequirementFailure( PREFIX + messageSupplier.get() );
         
         return value;
@@ -275,7 +275,7 @@ public class Require
     public static <T> Collection<T> nonEmpty( Collection<T> value, String message )
     {
     	
-    	if( value == null )
+    	if( value == null || value.isEmpty() )
     		throw new RequirementFailure( PREFIX + message );
     	
     	return value;
@@ -303,7 +303,7 @@ public class Require
      */
     public static <T> Collection<T> nonEmpty( Collection<T> value, Supplier<String> messageSupplier )
     {
-    	if( value == null )
+    	if( value == null || value.isEmpty() )
     		throw new RequirementFailure( PREFIX + messageSupplier.get() );
     	
     	return value;
