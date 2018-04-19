@@ -22,7 +22,6 @@
 package org.nerd4j.lang.bitfield;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 import org.nerd4j.lang.BitField;
 
@@ -375,10 +374,7 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	
 	
 	/**
-	 * Simple implementation that demands to 
-	 * {@link Arrays#hashCode(byte[])}.
-	 * 
-	 * @return the hash code for this array.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int hashCode()
@@ -389,9 +385,7 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	}
 
 	/**
-	 * Checks the {@link Class} compatibility than demands
-	 * to {@link Arrays#equals(byte[], byte[])} to check
-	 * the content equality.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean equals(Object obj)
