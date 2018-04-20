@@ -291,7 +291,7 @@ public class Require
     public static String nonEmpty( String value, String message )
     {
     	
-        return Require.trueFor( value, value == null || value.isEmpty(), message );
+        return Require.trueFor( value, value != null && ! value.isEmpty(), message );
         
     }
     
@@ -316,7 +316,7 @@ public class Require
     public static String nonEmpty( String value, Supplier<String> messageSupplier )
     {
         
-    	return Require.trueFor( value, value == null || value.isEmpty(), messageSupplier );
+    	return Require.trueFor( value, value != null && ! value.isEmpty(), messageSupplier );
         
     }
     
@@ -352,7 +352,7 @@ public class Require
     public static <V> Collection<V> nonEmpty( Collection<V> value, String message )
     {
     	
-    	return Require.trueFor( value, value == null || value.isEmpty(), message );
+    	return Require.trueFor( value, value != null && ! value.isEmpty(), message );
     	
     }
     
@@ -378,7 +378,7 @@ public class Require
     public static <V> Collection<V> nonEmpty( Collection<V> value, Supplier<String> messageSupplier )
     {
     	
-    	return Require.trueFor( value, value == null || value.isEmpty(), messageSupplier );
+    	return Require.trueFor( value, value != null && ! value.isEmpty(), messageSupplier );
     	
     }
     
