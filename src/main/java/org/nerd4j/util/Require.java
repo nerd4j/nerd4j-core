@@ -22,6 +22,7 @@
 package org.nerd4j.util;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import org.nerd4j.exception.RequirementFailure;
@@ -327,11 +328,12 @@ public class Require
      * Checks that the specified {@link Collection} reference is not {@code null} or empty.
      *
      * @param <V> the type of the elements in the {@link Collection}
+     * @param <C> the actual implementation of the {@link Collection}
      * @param value the {@link Collection} reference to check for emptiness
      * @return {@code value} if not {@code null} or empty
      * @throws RequirementFailure if {@code value} is {@code null}
      */
-    public static <V> Collection<V> nonEmpty( Collection<V> value )
+    public static <V,C extends Collection<V>> C nonEmpty( C value )
     {
     	
     	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
@@ -343,13 +345,14 @@ public class Require
      * and throws a customized {@link RequirementFailure} if it is.
      *
      * @param <V> the type of the elements in the {@link Collection}
+     * @param <C> the actual implementation of the {@link Collection}
      * @param value   the {@link Collection} reference to check for emptiness
      * @param message detail message to be used in the event that a {@code
      *                RequirementFailure} is thrown
      * @return {@code value} if not {@code null} or empty
      * @throws RequirementFailure if {@code value} is {@code null} or empty
      */
-    public static <V> Collection<V> nonEmpty( Collection<V> value, String message )
+    public static <V,C extends Collection<V>> C nonEmpty( C value, String message )
     {
     	
     	return Require.trueFor( value, value != null && ! value.isEmpty(), message );
@@ -369,17 +372,87 @@ public class Require
      * creating the string message directly.
      *
      * @param <V> the type of the elements in the {@link Collection}
+     * @param <C> the actual implementation of the {@link Collection}
      * @param value   the {@link Collection} reference to check for emptiness
      * @param messageSupplier supplier of the detail message to be
      * used in the event that a {@code RequirementFailure} is thrown
      * @return {@code value} if not {@code null} or empty
      * @throws RequirementFailure if {@code value} is {@code null} or empty
      */
-    public static <V> Collection<V> nonEmpty( Collection<V> value, Supplier<String> messageSupplier )
+    public static <V,C extends Collection<V>> C nonEmpty( C value, Supplier<String> messageSupplier )
     {
     	
     	return Require.trueFor( value, value != null && ! value.isEmpty(), messageSupplier );
     	
     }
+    
+    
+    /* NON EMPTY MAP CHECK */
+    
+    /**
+     * Checks that the specified {@link Map} reference is not {@code null} or empty.
+     *
+     * @param <K> the type of the key elements in the {@link Map}
+     * @param <V> the type of the value elements in the {@link Map}
+     * @param <M> the actual implementation of the {@link Map}
+     * @param value the {@link Map} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if {@code value} is {@code null}
+     */
+    public static <K,V,M extends Map<K,V>> M nonEmpty( M value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@link Map} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param <K> the type of the key elements in the {@link Map}
+     * @param <V> the type of the value elements in the {@link Map}
+     * @param <M> the actual implementation of the {@link Map}
+     * @param value   the {@link Map} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if {@code value} is {@code null} or empty
+     */
+    public static <K,V,M extends Map<K,V>> M nonEmpty( M value, String message )
+    {
+    	
+    	return Require.trueFor( value, value != null && ! value.isEmpty(), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@link Map} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param <K> the type of the key elements in the {@link Map}
+     * @param <V> the type of the value elements in the {@link Map}
+     * @param <M> the actual implementation of the {@link Map}
+     * @param value   the {@link Map} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if {@code value} is {@code null} or empty
+     */
+    public static <K,V,M extends Map<K,V>> M nonEmpty( M value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, value != null && ! value.isEmpty(), messageSupplier );
+    	
+    }
+    
     
 }
