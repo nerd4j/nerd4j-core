@@ -24,6 +24,9 @@ package org.nerd4j.lang;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.nerd4j.exception.RequirementFailure;
+import org.nerd4j.util.Require;
+
 /**
  * {@link Map} implementation able to remove oldest entries if maximum capacity
  * has been reached.
@@ -42,27 +45,45 @@ public class SpoolingLinkedHashMap<K,V> extends LinkedHashMap<K,V>
 	/** Default maximum capacity. */
 	private static final int DEFAULT_MAX_ENTRIES = 128;
 	
+	/** Default initial capacity. */
+	private static final int DEFAULT_INIT_ENTRIES = 16;
+	
+	/** Default load factor. */
+	private static final float DEFAULT_LOAD_FACTOR = .75f;
+	
+	
 	/** Configured maximum capacity. */
 	private final int maximumCapacity;
 	
-	
-    /**
-     * Constructs an empty insertion-ordered <tt>SpoolingLinkedHashMap</tt>
-     * instance with the specified maximum capacity, initial capacity and load
-     * factor.
-     *
-	 * @param  maximumCapacity the maximum capacity supported
-     * @param  initialCapacity the initial capacity
-     * @param  loadFactor      the load factor
-     * @throws IllegalArgumentException if the initial capacity is negative
-     *         or the load factor is nonpositive
-     */
-    public SpoolingLinkedHashMap(int maximumCapacity, int initialCapacity, float loadFactor)
-    {
-        super(initialCapacity, loadFactor);
-        this.maximumCapacity = initialCapacity < maximumCapacity ? maximumCapacity : initialCapacity;
-    }
 
+    /**
+	 * Constructs an empty insertion-ordered <tt>SpoolingLinkedHashMap</tt>
+	 * instance with the default maximum capacity (128) and default initial
+	 * capacity (16) and load factor (0.75).
+	 */
+    public SpoolingLinkedHashMap(  )
+    {
+    	
+    	this( DEFAULT_MAX_ENTRIES );
+    	
+    }
+    
+    /**
+	 * Constructs an empty insertion-ordered <tt>SpoolingLinkedHashMap</tt>
+	 * instance with the specified maximum capacity and default initial capacity
+	 * (16) and load factor (0.75).
+	 * 
+	 * @param maximumCapacity the maximum capacity supported.
+	 * @throws RequirementFailure if the maximum capacity is smaller than
+	 *         {@link #DEFAULT_INIT_ENTRIES}.
+	 */
+    public SpoolingLinkedHashMap( int maximumCapacity )
+    {
+    	
+    	this( maximumCapacity, DEFAULT_INIT_ENTRIES );
+    	
+    }
+    
     /**
 	 * Constructs an empty insertion-ordered <tt>SpoolingLinkedHashMap</tt>
 	 * instance with the specified maximum capacity and initial capacity and a
@@ -70,39 +91,63 @@ public class SpoolingLinkedHashMap<K,V> extends LinkedHashMap<K,V>
 	 * 
 	 * @param  maximumCapacity the maximum capacity supported
 	 * @param  initialCapacity the initial capacity
-	 * @throws IllegalArgumentException if the initial capacity is negative
+	 * @throws IllegalArgumentException if the initial capacity is negative.
+	 * @throws RequirementFailure if the maximum capacity is smaller than
+     *         the initial capacity.
 	 */
-    public SpoolingLinkedHashMap(int maximumCapacity, int initialCapacity)
+    public SpoolingLinkedHashMap( int maximumCapacity, int initialCapacity )
     {
-    	super( initialCapacity );
-    	this.maximumCapacity = initialCapacity < maximumCapacity ? maximumCapacity : initialCapacity;
+    	
+    	this( maximumCapacity, initialCapacity, DEFAULT_LOAD_FACTOR );
+    	
     }
-
+    
     /**
-	 * Constructs an empty insertion-ordered <tt>SpoolingLinkedHashMap</tt>
-	 * instance with the specified maximum capacity and default initial capacity
-	 * (16) and load factor (0.75).
-	 * 
-	 * @param maximumCapacity the maximum capacity supported
-	 */
-    public SpoolingLinkedHashMap( int maximumCapacity )
+     * Constructs an empty insertion-ordered <tt>SpoolingLinkedHashMap</tt>
+     * instance with the specified maximum capacity, initial capacity and load
+     * factor.
+     *
+	 * @param  maximumCapacity the maximum capacity supported.
+     * @param  initialCapacity the initial capacity.
+     * @param  loadFactor      the load factor.
+     * @throws IllegalArgumentException if the initial capacity is negative
+     *         or the load factor is non positive.
+     * @throws RequirementFailure if the maximum capacity is smaller than
+     *         the initial capacity.
+     */
+    public SpoolingLinkedHashMap( int maximumCapacity, int initialCapacity, float loadFactor )
     {
-    	super();
-    	this.maximumCapacity = maximumCapacity;
+    	
+        this( maximumCapacity, initialCapacity, loadFactor, false );
+        
     }
     
-	/**
-	 * Constructs an empty insertion-ordered <tt>SpoolingLinkedHashMap</tt>
-	 * instance with the default maximum capacity (100) and default initial
-	 * capacity (16) and load factor (0.75).
-	 */
-    public SpoolingLinkedHashMap()
+    /**
+     * Constructs an empty <tt>SpoolingLinkedHashMap</tt> instance with the
+     * specified maximum capacity, initial capacity, load factor and ordering
+     * mode.
+     *
+	 * @param  maximumCapacity the maximum capacity supported.
+     * @param  initialCapacity the initial capacity.
+     * @param  loadFactor      the load factor.
+     * @param  accessOrder     the ordering mode - <tt>true</tt> for
+     *         access-order, <tt>false</tt> for insertion-order
+     * @throws IllegalArgumentException if the initial capacity is negative
+     *         or the load factor is non positive.
+     * @throws RequirementFailure if the maximum capacity is smaller than
+     *         the initial capacity.
+     */
+    public SpoolingLinkedHashMap( int maximumCapacity, int initialCapacity, float loadFactor, boolean accessOrder )
     {
-    	super();
-    	this.maximumCapacity = DEFAULT_MAX_ENTRIES;
+    	
+        super( initialCapacity, loadFactor, accessOrder );
+        this.maximumCapacity = Require.trueFor( maximumCapacity, maximumCapacity >= initialCapacity,
+        		() -> "The initial capacity " + initialCapacity +
+        		      " must be less or equals to the maximum capacity " + maximumCapacity ); 
+        
     }
     
-
+    
     /**
      * Constructs an insertion-ordered <tt>SpoolingLinkedHashMap</tt> instance
      * with the same mappings as the specified map.
@@ -111,69 +156,37 @@ public class SpoolingLinkedHashMap<K,V> extends LinkedHashMap<K,V>
      * that) and a default load factor (0.75) and an initial capacity sufficient
      * to hold the mappings in the specified map.
      *
-	 * @param  maximumCapacity the maximum capacity supported
-     * @param  m the map whose mappings are to be placed in this map
-     * @throws NullPointerException if the specified map is null
+	 * @param  maximumCapacity the maximum capacity supported.
+     * @param  source the map whose mappings are to be placed in this map.
+     * @throws RequirementFailure if the specified map is null or the map
+     *         size is greater than the {@code maximumCapacity}.
      */
-    public SpoolingLinkedHashMap( int maximumCapacity, Map<? extends K, ? extends V> m)
+    public SpoolingLinkedHashMap( int maximumCapacity, Map<? extends K, ? extends V> source )
     {
-        super(m);
-        this.maximumCapacity = m.size() < maximumCapacity ? maximumCapacity : m.size();
+        
+    	super( Require.nonNull(source, "The source map is mandatory") );
+        
+        this.maximumCapacity = Require.trueFor( maximumCapacity, maximumCapacity >= source.size(),
+        		() -> "The maximum capacity " + maximumCapacity +
+  		              " must be greater than the provided map size " + source.size() );  
+        
     }
-
+	
     
-    /**
-     * Constructs an empty <tt>SpoolingLinkedHashMap</tt> instance with the
-     * specified maximum capacity, initial capacity, load factor and ordering
-     * mode.
-     *
-	 * @param  maximumCapacity the maximum capacity supported
-     * @param  initialCapacity the initial capacity
-     * @param  loadFactor      the load factor
-     * @param  accessOrder     the ordering mode - <tt>true</tt> for
-     *         access-order, <tt>false</tt> for insertion-order
-     * @throws IllegalArgumentException if the initial capacity is negative
-     *         or the load factor is nonpositive
-     */
-    public SpoolingLinkedHashMap(int maximumCapacity,
-    		                     int initialCapacity,
-    		                     float loadFactor,
-                                 boolean accessOrder)
-    {
-        super(initialCapacity,loadFactor,accessOrder);
-        this.maximumCapacity = initialCapacity < maximumCapacity ? maximumCapacity : initialCapacity;
-    }
-	
+    /* ***************** */
+    /*  EXTENSION HOOKS  */
+    /* ***************** */
 	
 
     /**
-	 * Returns <tt>true</tt> if this map should remove its eldest entry. This
-	 * method is invoked by <tt>put</tt> and <tt>putAll</tt> after inserting
-	 * a new entry into the map. It provides the implementor with the
-	 * opportunity to remove the eldest entry each time a new one is added. This
-	 * is useful if the map represents a cache: it allows the map to reduce
-	 * memory consumption by deleting stale entries.
-	 * <p>
-	 * Will return true if:
-	 * <ol>
-	 *  <li> the element has expired
-	 * </ol>
-	 * 
-	 * @param eldest The least recently inserted entry in the map, or if this is an
-	 *               access-ordered map, the least recently accessed entry. This is
-	 *               the entry that will be removed it this method returns
-	 *               <tt>true</tt>. If the map was empty prior to the
-	 *               <tt>put</tt> or <tt>putAll</tt> invocation resulting in
-	 *               this invocation, this will be the entry that was just
-	 *               inserted; in other words, if the map contains a single entry,
-	 *               the eldest entry is also the newest.
-	 * @return <tt>true</tt> if the eldest entry should be removed from the
-	 *         map; <tt>false</tt> if it should be retained.
+	 * {@inheritDoc}
 	 */
     @Override
-    protected boolean removeEldestEntry(Map.Entry<K,V> eldest)
+    protected boolean removeEldestEntry( Map.Entry<K,V> eldest )
     {
+    	
     	return size() > maximumCapacity;
+    	
     }
 	
 }
