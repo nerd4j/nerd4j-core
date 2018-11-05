@@ -141,9 +141,8 @@ public class SpoolingLinkedHashMap<K,V> extends LinkedHashMap<K,V>
     {
     	
         super( initialCapacity, loadFactor, accessOrder );
-        this.maximumCapacity = Require.trueFor( maximumCapacity, maximumCapacity >= initialCapacity,
-        		() -> "The initial capacity " + initialCapacity +
-        		      " must be less or equals to the maximum capacity " + maximumCapacity ); 
+        
+        this.maximumCapacity = check( maximumCapacity, initialCapacity );
         
     }
     
@@ -166,9 +165,7 @@ public class SpoolingLinkedHashMap<K,V> extends LinkedHashMap<K,V>
         
     	super( Require.nonNull(source, "The source map is mandatory") );
         
-        this.maximumCapacity = Require.trueFor( maximumCapacity, maximumCapacity >= source.size(),
-        		() -> "The maximum capacity " + maximumCapacity +
-  		              " must be greater than the provided map size " + source.size() );  
+    	this.maximumCapacity = check( maximumCapacity, source.size() );
         
     }
 	
@@ -186,6 +183,34 @@ public class SpoolingLinkedHashMap<K,V> extends LinkedHashMap<K,V>
     {
     	
     	return size() > maximumCapacity;
+    	
+    }
+    
+    
+    /* ***************** */
+    /*  PRIVATE METHODS  */
+    /* ***************** */
+    
+    
+    /**
+     * Checks if the given maximum capacity is greater than zero
+     * and greater or equals to the initial capacity.
+     * If not a {@link RequirementFailure} will be thrown.
+     * 
+     * @param maximumCapacity maximum capacity to check.
+     * @param initialCapacity initial capacity to compare with.
+     * @return the maximum capacity if according to requirements.
+     * @throws {@link RequirementFailure} if the check fails.
+     */
+    private int check( int maximumCapacity, int initialCapacity )
+    {
+    	
+    	final int max1 = Require.trueFor( maximumCapacity, maximumCapacity > 0, "The maximum capacity must be strict positive" );
+        final int max2 = max1 < DEFAULT_INIT_ENTRIES ? DEFAULT_INIT_ENTRIES : max1;
+        
+        return Require.trueFor( max2, max2 >= initialCapacity,
+        		() -> "The initial capacity (" + initialCapacity +
+        		      ") must be less or equals to the maximum capacity (" + maximumCapacity + ")" ); 
     	
     }
 	
