@@ -23,6 +23,7 @@ package org.nerd4j.util;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.function.Function;
 
 /**
  * Utility class providing the most common operations
@@ -43,12 +44,36 @@ public class EqualsUtils
 	 * @param thisClass the class the {@code otherObj} needs to have.
 	 * @param <Type> the returned type.
 	 * @return the {@code otherObj} casted to the right class if possible, {@code null} otherwise.
+	 * @deprecated use {@link #castIfSameClass(Object, Object)} instead.
 	 */
+	@Deprecated
 	@SuppressWarnings("unchecked")
 	public static <Type> Type castIfSameClass( Object otherObj, Class<Type> thisClass )
 	{
 		
 		if( otherObj != null && otherObj.getClass().equals(thisClass) )
+			return (Type) otherObj;
+		else
+			return null;
+		
+	}
+	
+	
+	/**
+	 * This method is intended to be used inside a {@link Object#equals(Object)}
+	 * to check if the object to equals is not {@code null} and if it has the
+	 * same class as {@code this} object.
+	 *  
+	 * @param thisObj   the object owner of the method {@link Object#equals(Object)}.
+	 * @param otherObj  the object to compare.
+	 * @param <Type> the returned type.
+	 * @return the {@code otherObj} casted to the right class if possible, {@code null} otherwise.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <Type> Type castIfSameClass( Type thisObj, Object otherObj )
+	{
+		
+		if( otherObj != null && otherObj.getClass().equals(thisObj.getClass()) )
 			return (Type) otherObj;
 		else
 			return null;
@@ -65,7 +90,9 @@ public class EqualsUtils
 	 * @param thisClass the class the {@code otherObj} needs to have.
 	 * @param <Type> the returned type.
 	 * @return the {@code otherObj} casted to the right class if possible, {@code null} otherwise.
+	 * @deprecated Use {@link #castIfInstanceOf(Object, Object)} instead.
 	 */
+	@Deprecated
 	@SuppressWarnings("unchecked")
 	public static <Type> Type castIfInstanceOf( Object otherObj, Class<Type> thisClass )
 	{
@@ -78,6 +105,28 @@ public class EqualsUtils
 	}
 	
     
+	/**
+	 * This method is intended to be used inside a {@link Object#equals(Object)}
+	 * to check if the object to equals is not {@code null} and if its class
+	 * is an instance of {@code thisClass}.
+	 *  
+	 * @param thisObj   the object owner of the method {@link Object#equals(Object)}.
+	 * @param otherObj  the object to compare.
+	 * @param <Type> the returned type.
+	 * @return the {@code otherObj} casted to the right class if possible, {@code null} otherwise.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <Type> Type castIfInstanceOf( Type thisObj, Object otherObj )
+	{
+		
+		if( otherObj != null && thisObj.getClass().isInstance(otherObj) )
+			return (Type) otherObj;
+		else
+			return null;
+		
+	}
+	
+	
     /**
      * This method is intended to be used inside a {@link Object#equals(Object)}
      * and tells if the field of {@code thisObject} equals to the related field
@@ -135,7 +184,9 @@ public class EqualsUtils
      * @param <Field> the type of the fields to check.
 	 * @return {@code true} if the given objects are two by two equal.
 	 * @throws IllegalArgumentException If the number of arguments is inconsistent.
+	 * @deprecated Use {@linkplain #equalsFields(Object, Object, Function...)} instead.
 	 */
+    @Deprecated
     public static <Field> boolean equalsFields( Field thisField, Field otherField, Object... others )
     {
 
@@ -153,6 +204,39 @@ public class EqualsUtils
 
     }
 
+    
+    /**
+     * This method is intended to be used inside a {@link Object#equals(Object)}
+     * and tells if the list of related fields are equals.
+     * <p>
+     * This method assumes both of the objects to be not null.
+     *  
+     * @param thisObject  the object owner of the method {@link Object#equals(Object)}.
+     * @param otherObject the object to be compared.
+     * @param fields      a list of functions that get the field to compare from the given object.
+     * @param <Type> the type of the objects to check.
+     * @return {@code true} if the given fields are two by two equal.
+     */
+	@SafeVarargs
+	public static <Type> boolean equalsFields( Type thisObject, Type otherObject,
+											   Function<Type,Object>... fields )
+    {
+    	
+    	for( Function<Type,Object> field : fields )
+    	{
+    		
+    		final Object thisField = field.apply( thisObject );
+    		final Object otherField = field.apply( otherObject );
+    		
+    		if( ! equalsFields(thisField, otherField) )
+    				return false;
+    		
+    	}
+    	
+    	return true;
+    	
+    }
+    
     
     /**
      * This method is intended to be used inside a {@link Object#equals(Object)}
@@ -219,7 +303,9 @@ public class EqualsUtils
      * @param <Field> the type of the fields to check.
 	 * @return {@code true} if the given objects are two by two equal.
 	 * @throws IllegalArgumentException If the number of arguments is inconsistent.
+	 * @deprecated Use {@linkplain #deepEqualsFields(Object, Object, Function...)} instead.
 	 */
+    @Deprecated
     public static <Field> boolean deepEqualsFields( Field thisField, Field otherField, Object... others )
     {
     	
@@ -232,6 +318,39 @@ public class EqualsUtils
     		for( int i = 0; i < others.length; ++i )
     			if( ! deepEqualsFields(others[i], others[++i]) )
     				return false;
+    	
+    	return true;
+    	
+    }
+    
+    
+    /**
+     * This method is intended to be used inside a {@link Object#equals(Object)}
+     * and tells if the list of related fields are equals.
+     * <p>
+     * This method assumes both of the objects to be not null.
+     *  
+     * @param thisObject  the object owner of the method {@link Object#equals(Object)}.
+     * @param otherObject the object to be compared.
+     * @param fields      a list of functions that get the field to compare from the given object.
+     * @param <Type> the type of the objects to check.
+     * @return {@code true} if the given fields are two by two equal.
+     */
+	@SafeVarargs
+	public static <Type> boolean deepEqualsFields( Type thisObject, Type otherObject,
+												   Function<Type,Object>... fields )
+    {
+    	
+    	for( Function<Type,Object> field : fields )
+    	{
+    		
+    		final Object thisField = field.apply( thisObject );
+    		final Object otherField = field.apply( otherObject );
+    		
+    		if( ! deepEqualsFields(thisField, otherField) )
+    				return false;
+    		
+    	}
     	
     	return true;
     	
