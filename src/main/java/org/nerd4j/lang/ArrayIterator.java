@@ -1,3 +1,24 @@
+/*
+ * #%L
+ * Nerd4j Core
+ * %%
+ * Copyright (C) 2011 - 2018 Nerd4j
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
 package org.nerd4j.lang;
 
 import java.util.Iterator;
@@ -29,6 +50,7 @@ public class ArrayIterator
 	 * Creates a new {@link Iterator} of {@link Byte}.
 	 * 
 	 * @param array source array.
+	 * @return a new {@link Iterator} of {@link Byte}.
 	 */
 	public static Iterator<Byte> create( byte[] array )
 	{
@@ -43,7 +65,8 @@ public class ArrayIterator
 	 * 
 	 * @param array          source array.
 	 * @param startInclusive the first index to cover, inclusive.
-	 * @param endExclusive   index immediately past the last index to cover. 
+	 * @param endExclusive   index immediately past the last index to cover.
+	 * @return a new {@link Iterator} of {@link Byte}.
 	 */
 	public static Iterator<Byte> create( byte[] array, int startInclusive, int endExclusive )
 	{
@@ -57,6 +80,7 @@ public class ArrayIterator
 	 * Creates a new {@link Iterator} of {@link Short}.
 	 * 
 	 * @param array source array.
+	 * @return a new {@link Iterator} of {@link Short}.
 	 */
 	public static Iterator<Short> create( short[] array )
 	{
@@ -71,7 +95,8 @@ public class ArrayIterator
 	 * 
 	 * @param array          source array.
 	 * @param startInclusive the first index to cover, inclusive.
-	 * @param endExclusive   index immediately past the last index to cover. 
+	 * @param endExclusive   index immediately past the last index to cover.
+	 * @return a new {@link Iterator} of {@link Short}.
 	 */
 	public static Iterator<Short> create( short[] array, int startInclusive, int endExclusive )
 	{
@@ -85,6 +110,7 @@ public class ArrayIterator
 	 * Creates a new {@link Iterator} of {@link Integer}.
 	 * 
 	 * @param array source array.
+	 * @return a new {@link Iterator} of {@link Integer}.
 	 */
 	public static Iterator<Integer> create( int[] array )
 	{
@@ -99,7 +125,8 @@ public class ArrayIterator
 	 * 
 	 * @param array          source array.
 	 * @param startInclusive the first index to cover, inclusive.
-	 * @param endExclusive   index immediately past the last index to cover. 
+	 * @param endExclusive   index immediately past the last index to cover.
+	 * @return a new {@link Iterator} of {@link Integer}.
 	 */
 	public static Iterator<Integer> create( int[] array, int startInclusive, int endExclusive )
 	{
@@ -113,6 +140,7 @@ public class ArrayIterator
 	 * Creates a new {@link Iterator} of {@link Long}.
 	 * 
 	 * @param array source array.
+	 * @return a new {@link Iterator} of {@link Long}.
 	 */
 	public static Iterator<Long> create( long[] array )
 	{
@@ -127,7 +155,8 @@ public class ArrayIterator
 	 * 
 	 * @param array          source array.
 	 * @param startInclusive the first index to cover, inclusive.
-	 * @param endExclusive   index immediately past the last index to cover. 
+	 * @param endExclusive   index immediately past the last index to cover.
+	 * @return a new {@link Iterator} of {@link Long}.
 	 */
 	public static Iterator<Long> create( long[] array, int startInclusive, int endExclusive )
 	{
@@ -141,6 +170,7 @@ public class ArrayIterator
 	 * Creates a new {@link Iterator} of {@link Float}.
 	 * 
 	 * @param array source array.
+	 * @return a new {@link Iterator} of {@link Float}.
 	 */
 	public static Iterator<Float> create( float[] array )
 	{
@@ -155,7 +185,8 @@ public class ArrayIterator
 	 * 
 	 * @param array          source array.
 	 * @param startInclusive the first index to cover, inclusive.
-	 * @param endExclusive   index immediately past the last index to cover. 
+	 * @param endExclusive   index immediately past the last index to cover.
+	 * @return a new {@link Iterator} of {@link Float}.
 	 */
 	public static Iterator<Float> create( float[] array, int startInclusive, int endExclusive )
 	{
@@ -169,6 +200,7 @@ public class ArrayIterator
 	 * Creates a new {@link Iterator} of {@link Double}.
 	 * 
 	 * @param array source array.
+	 * @return a new {@link Iterator} of {@link Double}.
 	 */
 	public static Iterator<Double> create( double[] array )
 	{
@@ -184,6 +216,7 @@ public class ArrayIterator
 	 * @param array          source array.
 	 * @param startInclusive the first index to cover, inclusive.
 	 * @param endExclusive   index immediately past the last index to cover. 
+	 * @return a new {@link Iterator} of {@link Double}.
 	 */
 	public static Iterator<Double> create( double[] array, int startInclusive, int endExclusive )
 	{
@@ -198,6 +231,7 @@ public class ArrayIterator
 	 * 
 	 * @param <Type> the type of the objects in the array.
 	 * @param array source array.
+	 * @return a new {@link Iterator} of objects of type {@code Type}.
 	 */
 	public static <Type> Iterator<Type> create( Type[] array )
 	{
@@ -213,7 +247,8 @@ public class ArrayIterator
 	 * @param <Type>         the type of the objects in the array.
 	 * @param array          source array.
 	 * @param startInclusive the first index to cover, inclusive.
-	 * @param endExclusive   index immediately past the last index to cover. 
+	 * @param endExclusive   index immediately past the last index to cover.
+	 * @return a new {@link Iterator} of objects of type {@code Type}.
 	 */
 	public static <Type> Iterator<Type> create( Type[] array, int startInclusive, int endExclusive )
 	{
@@ -228,6 +263,7 @@ public class ArrayIterator
 	 * the type of elements of the array by reflection.
 	 * 
 	 * @param array source array.
+	 * @return a new {@link Iterator} of the appropriate type.
 	 */
 	public static Iterator<?> create( Object array )
 	{
@@ -266,7 +302,8 @@ public class ArrayIterator
 	 * 
 	 * @param array          source array.
 	 * @param startInclusive the first index to cover, inclusive.
-	 * @param endExclusive   index immediately past the last index to cover. 
+	 * @param endExclusive   index immediately past the last index to cover.
+	 * @return a new {@link Iterator} of the appropriate type.
 	 */
 	public static Iterator<?> create( Object array, int startInclusive, int endExclusive )
 	{

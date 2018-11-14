@@ -1,3 +1,24 @@
+/*
+ * #%L
+ * Nerd4j Core
+ * %%
+ * Copyright (C) 2011 - 2018 Nerd4j
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
 package org.nerd4j.lang;
 
 import java.util.Iterator;
@@ -16,7 +37,7 @@ import java.util.stream.StreamSupport;
  * {@code short} and {@code float}.
  * 
  * <p>
- * To keep a common interface and allow the method {@link #create(Object, boolean)}
+ * To keep a common interface and allow the method {@link #create(Object, int, int, boolean)}
  * to deduce the right type by reflection all methods are returning object streams
  * also when primitive streams are available.
  * 
@@ -35,6 +56,7 @@ public class ArrayStream
 	 * 
 	 * @param array    source array.
 	 * @param parallel tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Byte}.
 	 */
 	public static Stream<Byte> create( byte[] array, boolean parallel )
 	{
@@ -52,6 +74,7 @@ public class ArrayStream
 	 * @param startInclusive the first index to cover, inclusive.
 	 * @param endExclusive   index immediately past the last index to cover. 
 	 * @param parallel       tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Byte}.
 	 */
 	public static Stream<Byte> create( byte[] array, int startInclusive, int endExclusive, boolean parallel )
 	{
@@ -68,6 +91,7 @@ public class ArrayStream
 	 * 
 	 * @param array    source array.
 	 * @param parallel tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Short}.
 	 */
 	public static Stream<Short> create( short[] array, boolean parallel )
 	{
@@ -85,6 +109,7 @@ public class ArrayStream
 	 * @param startInclusive the first index to cover, inclusive.
 	 * @param endExclusive   index immediately past the last index to cover. 
 	 * @param parallel       tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Short}.
 	 */
 	public static Stream<Short> create( short[] array, int startInclusive, int endExclusive, boolean parallel )
 	{
@@ -101,6 +126,7 @@ public class ArrayStream
 	 * 
 	 * @param array    source array.
 	 * @param parallel tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Integer}.
 	 */
 	public static Stream<Integer> create( int[] array, boolean parallel )
 	{
@@ -118,6 +144,7 @@ public class ArrayStream
 	 * @param startInclusive the first index to cover, inclusive.
 	 * @param endExclusive   index immediately past the last index to cover. 
 	 * @param parallel       tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Integer}.
 	 */
 	public static Stream<Integer> create( int[] array, int startInclusive, int endExclusive, boolean parallel )
 	{
@@ -134,6 +161,7 @@ public class ArrayStream
 	 * 
 	 * @param array    source array.
 	 * @param parallel tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Long}.
 	 */
 	public static Stream<Long> create( long[] array, boolean parallel )
 	{
@@ -151,6 +179,7 @@ public class ArrayStream
 	 * @param startInclusive the first index to cover, inclusive.
 	 * @param endExclusive   index immediately past the last index to cover. 
 	 * @param parallel       tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Long}.
 	 */
 	public static Stream<Long> create( long[] array, int startInclusive, int endExclusive, boolean parallel )
 	{
@@ -167,6 +196,7 @@ public class ArrayStream
 	 * 
 	 * @param array    source array.
 	 * @param parallel tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Float}.
 	 */
 	public static Stream<Float> create( float[] array, boolean parallel )
 	{
@@ -184,6 +214,7 @@ public class ArrayStream
 	 * @param startInclusive the first index to cover, inclusive.
 	 * @param endExclusive   index immediately past the last index to cover. 
 	 * @param parallel       tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Float}.
 	 */
 	public static Stream<Float> create( float[] array, int startInclusive, int endExclusive, boolean parallel )
 	{
@@ -200,6 +231,7 @@ public class ArrayStream
 	 * 
 	 * @param array    source array.
 	 * @param parallel tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Double}.
 	 */
 	public static Stream<Double> create( double[] array, boolean parallel )
 	{
@@ -217,6 +249,7 @@ public class ArrayStream
 	 * @param startInclusive the first index to cover, inclusive.
 	 * @param endExclusive   index immediately past the last index to cover. 
 	 * @param parallel       tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of {@link Double}.
 	 */
 	public static Stream<Double> create( double[] array, int startInclusive, int endExclusive, boolean parallel )
 	{
@@ -233,6 +266,7 @@ public class ArrayStream
 	 * @param <Type>   the type of the objects in the array.
 	 * @param array    source array.
 	 * @param parallel tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of objects of type {@code Type}.
 	 */
 	public static <Type> Stream<Type> create( Type[] array, boolean parallel )
 	{
@@ -250,6 +284,7 @@ public class ArrayStream
 	 * @param startInclusive the first index to cover, inclusive.
 	 * @param endExclusive   index immediately past the last index to cover. 
 	 * @param parallel       tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of objects of type {@code Type}.
 	 */
 	public static <Type> Stream<Type> create( Type[] array, int startInclusive, int endExclusive, boolean parallel )
 	{
@@ -268,6 +303,7 @@ public class ArrayStream
 	 * @param startInclusive the first index to cover, inclusive.
 	 * @param endExclusive   index immediately past the last index to cover. 
 	 * @param parallel       tells if the resulting {@link Stream} should be parallel or sequential.
+	 * @return a new {@link Stream} of the appropriate type.
 	 */
 	public static Stream<?> create( Object array, int startInclusive, int endExclusive, boolean parallel )
 	{
