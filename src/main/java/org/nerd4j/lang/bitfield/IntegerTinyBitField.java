@@ -34,6 +34,7 @@ public class IntegerTinyBitField extends AbstractTinyBitField<Integer>
 	/** Default Serial Version UID. */
 	private static final long serialVersionUID = 1L;
 	
+		
 	/**
 	 * Default constructor.
 	 * <p>

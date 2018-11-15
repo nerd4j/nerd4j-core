@@ -44,6 +44,22 @@ public class EnumBitField<E extends Enum<E>> extends AbstractBitField<E>
 	/** The type of the {@link Enum Enum&#60;E&#62;} to handle. */
 	private final Class<E> enumClass;
 	
+	
+	/**
+	 * Default constructor.
+	 * <p>
+	 * Is intended to be used by reflection only.
+	 *  
+	 */
+	private EnumBitField()
+	{
+		
+		super( 1 );
+		
+		enumClass = null;
+		
+	}
+	
 
 	/**
 	 * Creates an {@link EnumBitField} that handles

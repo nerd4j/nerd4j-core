@@ -47,6 +47,22 @@ public class EnumTinyBitField<E extends Enum<E>> extends AbstractTinyBitField<E>
 	
 	
 	/**
+	 * Default constructor.
+	 * <p>
+	 * Is intended to be used by reflection only.
+	 *  
+	 */
+	private EnumTinyBitField()
+	{
+		
+		super();
+		
+		enumClass = null;
+		
+	}
+	
+	
+	/**
 	 * Creates an {@link EnumTinyBitField} that handles
 	 * {@link Enum Enum&#60;E&#62;} of the provided
 	 * type.

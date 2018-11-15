@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 import org.nerd4j.lang.BitField;
+import org.nerd4j.util.EqualsUtils;
+import org.nerd4j.util.HashCoder;
 
 /**
  * Base abstract implementation of the {@link BitField BitField&#60;I&#62;}
@@ -507,7 +509,7 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	public int hashCode()
 	{
 		
-		return Arrays.hashCode(data);
+		return HashCoder.hashCode( 79, data );
 		
 	}
 
@@ -521,13 +523,11 @@ public abstract class AbstractBitField<I> implements BitField<I>, Serializable, 
 	{
 		
 		if (this == obj) return true;		
+		
+		final AbstractBitField<I> other = EqualsUtils.castIfSameClass( this, obj );
 		if (obj == null) return false;
 		
-		if( getClass() != obj.getClass() ) return false;
-		
-		@SuppressWarnings("unchecked")
-		final AbstractBitField<I> other = (AbstractBitField<I>) obj;		
-		return Arrays.equals(data, other.data);
+		return Arrays.equals( data, other.data );
 		
 	}
 	

@@ -36,6 +36,20 @@ public class IntegerBitField extends AbstractBitField<Integer>
 	
 	
 	/**
+	 * Default constructor.
+	 * <p>
+	 * Is intended to be used by reflection only.
+	 *  
+	 */
+	private IntegerBitField()
+	{
+		
+		super( 1 );
+		
+	}
+	
+	
+	/**
 	 * Constructor with parameters.
 	 * 
 	 * <p>

@@ -24,6 +24,8 @@ package org.nerd4j.lang.bitfield;
 import java.io.Serializable;
 
 import org.nerd4j.lang.BitField;
+import org.nerd4j.util.EqualsUtils;
+import org.nerd4j.util.HashCoder;
 
 /**
  * Alternative abstract implementation of the {@link BitField
@@ -380,7 +382,7 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	public int hashCode()
 	{
 		
-		return (int)(data ^ (data >>> 32));
+		return HashCoder.hashCode( 79, data );
 		
 	}
 
@@ -391,14 +393,10 @@ public abstract class AbstractTinyBitField<I> implements BitField<I>, Serializab
 	public boolean equals(Object obj)
 	{
 		
-		if (this == obj) return true;		
-		if (obj == null) return false;
+		if( this == obj ) return true;		
 		
-		if( getClass() != obj.getClass() ) return false;
-		
-		@SuppressWarnings("unchecked")
-		final AbstractTinyBitField<I> other = (AbstractTinyBitField<I>) obj;		
-		return data == other.data;
+		final AbstractTinyBitField<I> other = EqualsUtils.castIfSameClass( this, obj );
+		return other != null && data == other.data;
 		
 	}
 	
