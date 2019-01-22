@@ -57,8 +57,11 @@ public class Require
 	private static final String PREFIX = "[Requirement failed] - ";
 	
 	
-	/* GENERIC ASSERTION CHECK */
+	/* ************************* */
+	/*  GENERIC ASSERTION CHECK  */
+	/* ************************* */
 
+	
 	/**
      * Checks the given assertion to be {@code true}.
      * 
@@ -115,8 +118,11 @@ public class Require
     }
     
     
-	/* ASSERTION FOR A GIVEN VALUE CHECK */
+    /* ************************************ */
+	/*  ASSERTION FOR A GIVEN VALUE CHECKS  */
+    /* ************************************ */
 
+    
 	/**
      * Checks the given assertion to hold for the specified value.
      * 
@@ -200,7 +206,9 @@ public class Require
     }
     
     
-    /* NON NULL CHECK */
+    /* ***************** */
+    /*  NON NULL CHECKS  */
+    /* ***************** */
     
     /**
      * Checks that the specified object reference is not {@code null}.
@@ -263,7 +271,10 @@ public class Require
     }
     
     
-    /* NON EMPTY STRING CHECK */
+    /* ************************* */
+    /*  NON EMPTY STRING CHECKS  */
+    /* ************************* */
+    
     
     /**
      * Checks that the specified {@link String} reference is not {@code null} or empty.
@@ -292,7 +303,7 @@ public class Require
     public static String nonEmpty( String value, String message )
     {
     	
-        return Require.trueFor( value, value != null && ! value.isEmpty(), message );
+        return Require.trueFor( value, IsNot.empty(value), message );
         
     }
     
@@ -317,12 +328,77 @@ public class Require
     public static String nonEmpty( String value, Supplier<String> messageSupplier )
     {
         
-    	return Require.trueFor( value, value != null && ! value.isEmpty(), messageSupplier );
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
         
     }
     
 	
-    /* NON EMPTY COLLECTION CHECK */
+    /* ************************* */
+    /*  NON BLANK STRING CHECKS  */
+    /* ************************* */
+    
+    
+    /**
+     * Checks that the specified {@link String} satisfies {@link IsNot#blank(String)}.
+     *
+     * @param value the {@link String} reference to check
+     * @return {@code value} if satisfies {@link IsNot#blank(String)}
+     * @throws RequirementFailure if the check fails
+     */
+    public static String nonBlank( String value )
+    {
+    	
+    	return Require.nonBlank( value, () -> "this argument must not be blank but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@link String} satisfies {@link IsNot#blank(String)}
+     * and throws a customized {@link RequirementFailure} if not.
+     *
+     * @param value   the {@link String} reference to check
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if satisfies {@link IsNot#blank(String)}
+     * @throws RequirementFailure if the check fails
+     */
+    public static String nonBlank( String value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.blank(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@link String} satisfies {@link IsNot#blank(String)}
+     * and throws a customized {@link RequirementFailure} if not.
+     *
+     * <p>Unlike the method {@link #nonEmpty(String, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param value   the {@link String} reference to check
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if satisfies {@link IsNot#blank(String)}
+     * @throws RequirementFailure if the check fails
+     */
+    public static String nonBlank( String value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.blank(value), messageSupplier );
+    	
+    }
+    
+    
+    /* ***************************** */
+    /*  NON EMPTY COLLECTION CHECKS  */
+    /* ***************************** */
+    
     
     /**
      * Checks that the specified {@link Collection} reference is not {@code null} or empty.
@@ -355,7 +431,7 @@ public class Require
     public static <V,C extends Collection<V>> C nonEmpty( C value, String message )
     {
     	
-    	return Require.trueFor( value, value != null && ! value.isEmpty(), message );
+    	return Require.trueFor( value, IsNot.empty(value), message );
     	
     }
     
@@ -382,12 +458,15 @@ public class Require
     public static <V,C extends Collection<V>> C nonEmpty( C value, Supplier<String> messageSupplier )
     {
     	
-    	return Require.trueFor( value, value != null && ! value.isEmpty(), messageSupplier );
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
     	
     }
     
     
-    /* NON EMPTY MAP CHECK */
+    /* ********************** */
+    /*  NON EMPTY MAP CHECKS  */
+    /* ********************** */
+    
     
     /**
      * Checks that the specified {@link Map} reference is not {@code null} or empty.
@@ -422,7 +501,7 @@ public class Require
     public static <K,V,M extends Map<K,V>> M nonEmpty( M value, String message )
     {
     	
-    	return Require.trueFor( value, value != null && ! value.isEmpty(), message );
+    	return Require.trueFor( value, IsNot.empty(value), message );
     	
     }
     
@@ -450,9 +529,545 @@ public class Require
     public static <K,V,M extends Map<K,V>> M nonEmpty( M value, Supplier<String> messageSupplier )
     {
     	
-    	return Require.trueFor( value, value != null && ! value.isEmpty(), messageSupplier );
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
     	
     }
     
+    
+    /* ************************ */
+    /*  NON EMPTY ARRAY CHECKS  */
+    /* ************************ */
+
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty.
+     *
+     * @param <V> the type of the elements in the {@code array}
+     * @param value the {@code array} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static <V> V[] nonEmpty( V[] value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param <V> the type of the elements in the {@code array}
+     * @param value the {@code array} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static <V> V[] nonEmpty( V[] value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param <V> the type of the elements in the {@code array}
+     * @param value the {@code array} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static <V> V[] nonEmpty( V[] value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
+    	
+    }
+    
+    
+    /*  ARRAY OF BOOLEAN  */
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static boolean[] nonEmpty( boolean[] value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static boolean[] nonEmpty( boolean[] value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static boolean[] nonEmpty( boolean[] value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
+    	
+    }
+    
+    
+    /*  ARRAY OF CHAR  */
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static char[] nonEmpty( char[] value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + String.valueOf(value) );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static char[] nonEmpty( char[] value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static char[] nonEmpty( char[] value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
+    	
+    }
+    
+    
+    /*  ARRAY OF BYTE  */
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static byte[] nonEmpty( byte[] value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static byte[] nonEmpty( byte[] value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static byte[] nonEmpty( byte[] value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
+    	
+    }
+    
+    
+    /*  ARRAY OF SHORT  */
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static short[] nonEmpty( short[] value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static short[] nonEmpty( short[] value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static short[] nonEmpty( short[] value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
+    	
+    }
+    
+    
+    /*  ARRAY OF INT  */
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static int[] nonEmpty( int[] value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static int[] nonEmpty( int[] value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static int[] nonEmpty( int[] value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
+    	
+    }
+    
+    
+    /*  ARRAY OF FLOAT  */
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static float[] nonEmpty( float[] value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static float[] nonEmpty( float[] value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static float[] nonEmpty( float[] value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
+    	
+    }
+    
+    
+    /*  ARRAY OF LONG  */
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static long[] nonEmpty( long[] value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static long[] nonEmpty( long[] value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static long[] nonEmpty( long[] value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
+    	
+    }
+    
+    
+    /*  ARRAY OF DOUBLE  */
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static double[] nonEmpty( double[] value )
+    {
+    	
+    	return Require.nonEmpty( value, () -> "this argument must not be empty but was " + value );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param message detail message to be used in the event that a {@code
+     *                RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static double[] nonEmpty( double[] value, String message )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), message );
+    	
+    }
+    
+    /**
+     * Checks that the specified {@code array} reference is not {@code null} or empty
+     * and throws a customized {@link RequirementFailure} if it is.
+     *
+     * <p>Unlike the method {@link #nonEmpty(Map, String)},
+     * this method allows creation of the message to be deferred until
+     * after the null check is made. While this may confer a
+     * performance advantage in the non-null case, when deciding to
+     * call this method care should be taken that the costs of
+     * creating the message supplier are less than the cost of just
+     * creating the string message directly.
+     *
+     * @param value the {@code array} reference to check for emptiness
+     * @param messageSupplier supplier of the detail message to be
+     * used in the event that a {@code RequirementFailure} is thrown
+     * @return {@code value} if not {@code null} or empty
+     * @throws RequirementFailure if the check fails
+     */
+    public static double[] nonEmpty( double[] value, Supplier<String> messageSupplier )
+    {
+    	
+    	return Require.trueFor( value, IsNot.empty(value), messageSupplier );
+    	
+    }
     
 }
